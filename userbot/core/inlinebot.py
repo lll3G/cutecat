@@ -53,7 +53,7 @@ def ibuild_keyboard(buttons):
 
 
 def main_menu():
-    text = f"𝗨𝘀𝗲𝗿𝗯𝗼𝘁 𝗛𝗲𝗹𝗽𝗲𝗿\
+    text = f"𝗖𝗮𝘁𝗨𝘀𝗲𝗿𝗯𝗼𝘁 𝗛𝗲𝗹𝗽𝗲𝗿\
         \n𝗣𝗿𝗼𝘃𝗶𝗱𝗲𝗱 𝗯𝘆 {mention}"
     buttons = [
         (
@@ -531,7 +531,7 @@ async def inline_handler(event):  # sourcery no-metrics
             type="photo",
             title="𝘾𝙖𝙩𝙐𝙨𝙚𝙧𝙗𝙤𝙩",
             description="Deploy yourself",
-            url="https://github.com/Jisan09/catuserbot",
+            url="https://github.com/abasheyari595/catuserbot",
             thumb=photo,
             content=photo,
             send_message=types.InputBotInlineMessageMediaAuto(

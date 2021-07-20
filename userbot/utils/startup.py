@@ -63,9 +63,9 @@ async def startupmessage():
         if BOTLOG:
             Config.CATUBLOGO = await catub.tgbot.send_file(
                 BOTLOG_CHATID,
-                "https://telegra.ph/file/4e3ba8e8f7e535d5a2abe.jpg",
-                caption="**Your CatUserbot has been started successfully.**",
-                buttons=[(Button.url("Support", "https://t.me/catuserbot"),)],
+                "https://telegra.ph/file/ce8a55926ecbe896454e5.jpg",
+                caption="**Your bot has been started successfully.**",
+                buttons=[(Button.url("DEV", "https://t.me/YVW_6"),)],
             )
     except Exception as e:
         LOGS.error(e)

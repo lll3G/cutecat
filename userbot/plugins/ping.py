@@ -8,12 +8,12 @@ plugin_category = "tools"
 
 
 @catub.cat_cmd(
-    pattern="pong( -a|$)",
-    command=("pong", plugin_category),
+    pattern="ping( -a|$)",
+    command=("ping", plugin_category),
     info={
         "header": "check how long it takes to ping your userbot",
         "flags": {"-a": "average ping"},
-        "usage": ["{tr}pong", "{tr}pong -a"],
+        "usage": ["{tr}ping", "{tr}ping -a"],
     },
 )
 async def _(event):
@@ -35,7 +35,7 @@ async def _(event):
         end = datetime.now()
         ms = (end - start).microseconds / 1000
         await catevent.edit(f"╭         ─┉─ • ─┉─       ╮\n"
-            f"<b><i>  📡 Ⓜⓨ Ⓟⓘⓝⓖ</(b></i>\n  😹 {ms} <b><i>ms\n  😼 🅑🅞🅣 🅞🅕 {hmention}</b></i>\n"
+            f"<b><i>  📡 Ⓟⓞⓝⓖ</(b></i>\n  😹 {ms} <b><i>ms\n  😼 Ⓑⓞⓣ ⓞⓕ {hmention}</b></i>\n"
             f"╰        ─┉─¡! • !¡─┉─       ╯\n",
             parse_mode="html",
         )

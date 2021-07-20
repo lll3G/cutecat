@@ -1,4 +1,4 @@
-# batmanpfp and thorpfp by @Nihinivi
+# batmanpfp and thorpfp by @YVW_6
 
 import asyncio
 import base64
@@ -38,7 +38,7 @@ from . import (
 )
 
 plugin_category = "tools"
-DEFAULTUSERBIO = DEFAULT_BIO or " ᗯᗩᏆᎢᏆᑎᏀ ᏞᏆᏦᗴ ᎢᏆᗰᗴ  "
+DEFAULTUSERBIO = DEFAULT_BIO or "𝒕𝒊𝒎𝒆 𝒏𝒐𝒘"
 DEFAULTUSER = AUTONAME or Config.ALIVE_NAME
 LOGS = logging.getLogger(__name__)
 
@@ -90,7 +90,7 @@ async def autopicloop():
         shutil.copy(autopic_path, autophoto_path)
         im = Image.open(autophoto_path)
         file_test = im.rotate(counter, expand=False).save(autophoto_path, "PNG")
-        current_time = datetime.now().strftime("  Time: %H:%M \n  Date: %d.%m.%y ")
+        current_time = datetime.now().strftime("  Time: %I:%M \n  Date: %d.%m.%y ")
         img = Image.open(autophoto_path)
         drawn_text = ImageDraw.Draw(img)
         fnt = ImageFont.truetype(FONT_FILE_TO_USE, 30)
@@ -144,7 +144,7 @@ async def digitalpicloop():
                 pass
         shutil.copy(digitalpic_path, autophoto_path)
         Image.open(autophoto_path)
-        current_time = datetime.now().strftime("%H:%M")
+        current_time = datetime.now().strftime("%I:%M")
         img = Image.open(autophoto_path)
         drawn_text = ImageDraw.Draw(img)
         cat = str(base64.b64decode("dXNlcmJvdC9oZWxwZXJzL3N0eWxlcy9kaWdpdGFsLnR0Zg=="))[
@@ -196,7 +196,7 @@ async def bloom_pfploop():
         image = Image.open(autophoto_path)
         image.paste((R, G, B), [0, 0, image.size[0], image.size[1]])
         image.save(autophoto_path)
-        current_time = datetime.now().strftime("\n Time: %H:%M:%S \n \n Date: %d/%m/%y")
+        current_time = datetime.now().strftime("\n Time: %I:%M:%S \n \n Date: %d/%m/%y")
         img = Image.open(autophoto_path)
         drawn_text = ImageDraw.Draw(img)
         fnt = ImageFont.truetype(FONT_FILE_TO_USE, 60)
@@ -218,8 +218,8 @@ async def autoname_loop():
     AUTONAMESTART = gvarstatus("autoname") == "true"
     while AUTONAMESTART:
         DM = time.strftime("%d-%m-%y")
-        HM = time.strftime("%H:%M")
-        name = f"⌚️ {HM}||›  {DEFAULTUSER} ‹||📅 {DM}"
+        HM = time.strftime("%I:%M")
+        name = f"𖠕 {HM} »» {DEFAULTUSER}"
         LOGS.info(name)
         try:
             await catub(functions.account.UpdateProfileRequest(first_name=name))
@@ -234,8 +234,8 @@ async def autobio_loop():
     AUTOBIOSTART = gvarstatus("autobio") == "true"
     while AUTOBIOSTART:
         DMY = time.strftime("%d.%m.%Y")
-        HM = time.strftime("%H:%M")
-        bio = f"📅 {DMY} | {DEFAULTUSERBIO} | ⌚️ {HM}"
+        HM = time.strftime("%I:%M")
+        bio = f"𖠕 {DMY} »» {DEFAULTUSERBIO} »» ☻ {HM}"
         LOGS.info(bio)
         try:
             await catub(functions.account.UpdateProfileRequest(about=bio))

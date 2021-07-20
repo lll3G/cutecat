@@ -1,45 +1,60 @@
-# ported from uniborg
-# https://github.com/muhammedfurkan/UniBorg/blob/master/stdplugins/ezanvakti.py
 import json
-
 import requests
-
-from ..sql_helper.globals import gvarstatus
 from . import catub, edit_delete, edit_or_reply
+
+PLACE = ""
 
 plugin_category = "extra"
 
-
 @catub.cat_cmd(
-    pattern="azan(?:\s|$)([\s\S]*)",
+    pattern="azan(?: |$)(.*)",
     command=("azan", plugin_category),
     info={
         "header": "Shows you the Islamic prayer times of the given city name.",
         "note": "you can set default city by using {tr}setcity command.",
-        "usage": "{tr}azan <city name>",
-        "examples": "{tr}azan hyderabad",
+        "usage": "{tr}azan <city>",
+        "examples": "{tr}azan baghdad ",
     },
 )
 async def get_adzan(adzan):
-    "Shows you the Islamic prayer times of the given city name"
-    input_str = adzan.pattern_match.group(1)
-    LOKASI = gvarstatus("DEFCITY") or "Delhi" if not input_str else input_str
-    url = f"http://muslimsalat.com/{LOKASI}.json?key=bd099c5825cbedb9aa934e255a81a5fc"
+    if not adzan.pattern_match.group(1):
+        LOCATION = PLACE
+        if not LOCATION:
+            await adzan.edit("Please specify a city or a state.")
+            return
+    else:
+        LOCATION = adzan.pattern_match.group(1)
+
+    # url = f'http://muslimsalat.com/{LOKASI}.json?key=bd099c5825cbedb9aa934e255a81a5fc'
+    url = f"https://api.pray.zone/v2/times/today.json?city={LOCATION}&timeformat=2"
     request = requests.get(url)
-    if request.status_code != 200:
-        return await edit_delete(
-            adzan, f"`Couldn't fetch any data about the city {LOKASI}`", 5
-        )
-    result = json.loads(request.text)
-    catresult = f"<b>Islamic prayer times </b>\
-            \n\n<b>City     : </b><i>{result['query']}</i>\
-            \n<b>Country  : </b><i>{result['country']}</i>\
-            \n<b>Date     : </b><i>{result['items'][0]['date_for']}</i>\
-            \n<b>Fajr     : </b><i>{result['items'][0]['fajr']}</i>\
-            \n<b>Shurooq    : </b><i>{result['items'][0]['shurooq']}</i>\
-            \n<b>Dhuhr    : </b><i>{result['items'][0]['dhuhr']}</i>\
-            \n<b>Asr    : </b><i>{result['items'][0]['asr']}</i>\
-            \n<b>Maghrib    : </b><i>{result['items'][0]['maghrib']}</i>\
-            \n<b>Isha     : </b><i>{result['items'][0]['isha']}</i>\
-    "
-    await edit_or_reply(adzan, catresult, "html")
+    if request.status_code == 500:
+        return await adzan.edit(f"Couldn't find city `{LOCATION}`")
+
+    parsed = json.loads(request.text)
+
+    city = parsed["results"]["location"]["city"]
+    country = parsed["results"]["location"]["country"]
+    timezone = parsed["results"]["location"]["timezone"]
+    date = parsed["results"]["datetime"][0]["date"]["gregorian"]
+
+    imsak = parsed["results"]["datetime"][0]["times"]["Imsak"]
+    subuh = parsed["results"]["datetime"][0]["times"]["Fajr"]
+    zuhur = parsed["results"]["datetime"][0]["times"]["Dhuhr"]
+    ashar = parsed["results"]["datetime"][0]["times"]["Asr"]
+    maghrib = parsed["results"]["datetime"][0]["times"]["Maghrib"]
+    isya = parsed["results"]["datetime"][0]["times"]["Isha"]
+
+    result = (
+        f"**Jadwal Sholat 🌹🌹**:\n"
+        f"📅 `{date} | {timezone}`\n"
+        f"🌏 `{city} | {country}`\n\n"
+        f"**Imsak :** `{imsak}`\n"
+        f"**Subuh :** `{subuh}`\n"
+        f"**Zuhur :** `{zuhur}`\n"
+        f"**Ashar :** `{ashar}`\n"
+        f"**Maghrib :** `{maghrib}`\n"
+        f"**Isya :** `{isya}`\n"
+    )
+
+    await adzan.edit(result)

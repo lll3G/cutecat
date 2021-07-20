@@ -103,10 +103,10 @@ async def bot_start(event):
                 my_mention=my_mention,
             )
         else:
-            start_msg = f"Hey! 👤{mention},\
-                        \nI am {my_mention}'s assistant bot.\
-                        \nYou can contact to my master from here.\
-                        \n\nPowered by [ოᏒ ᏉꂅՈ☻ო](https://t.me/YVW_6)"
+            start_msg = f"مرحبا يا 👤{mention}\
+                        \nيمكنك مراسلتنا باستخدام هذا البوت.\
+                        \n»» You can contact to my DEV from here ««\
+                        \n\nارسل رسالتك وسيتم الرد عليك 🌹🔥."
         buttons = None
     else:
         start_msg = "Hey Master!\

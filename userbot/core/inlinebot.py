@@ -255,7 +255,7 @@ async def inline_handler(event):  # sourcery no-metrics
             buttons = [
                 (
                     Button.inline("Stats", data="stats"),
-                    Button.url("Repo", "https://github.com/abasheyari595/catuserbot"),
+                    Button.url("Repo", "https://github.com/abasheyari595/evilcat"),
                 )
             ]
             ALIVE_PIC = gvarstatus("ALIVE_PIC")
@@ -512,7 +512,7 @@ async def inline_handler(event):  # sourcery no-metrics
     else:
         buttons = [
             (
-                Button.url("Source code", "https://github.com/abasheyari595/catuserbot"),
+                Button.url("Source code", "https://github.com/abasheyari595/evilcat"),
                 Button.url(
                     "Deploy",
                     "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2FMr-confused%2Fcatpack&template=https%3A%2F%2Fgithub.com%2FMr-confused%2Fcatpack",
@@ -531,7 +531,7 @@ async def inline_handler(event):  # sourcery no-metrics
             type="photo",
             title="𝘾𝙖𝙩𝙐𝙨𝙚𝙧𝙗𝙤𝙩",
             description="Deploy yourself",
-            url="https://github.com/abasheyari595/catuserbot",
+            url="https://github.com/abasheyari595/evilcat",
             thumb=photo,
             content=photo,
             send_message=types.InputBotInlineMessageMediaAuto(

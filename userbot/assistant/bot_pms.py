@@ -104,8 +104,8 @@ async def bot_start(event):
             )
         else:
             start_msg = f"مرحبا يا 👤{mention}\
-                        \nيمكنك مراسلتنا باستخدام هذا البوت.\
-                        \n»» You can contact to my DEV from here ««\
+                        \n\nيمكنك مراسلتنا باستخدام هذا البوت.\
+                        \n\n»» You can contact to my DEV from here ««\
                         \n\nارسل رسالتك وسيتم الرد عليك 🌹🔥."
         buttons = None
     else:

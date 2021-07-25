@@ -607,12 +607,12 @@ async def on_plug_in_callback_query_handler(event):
     pattern="pmguard (on|off)$",
     command=("pmguard", plugin_category),
     info={
-        "header": "To turn on or turn off pmpermit.",
+        "header": "لتشغيل او تعطيل حماية الخاص.",
         "usage": "{tr}pmguard on/off",
     },
 )
 async def pmpermit_on(event):
-    "Turn on/off pmpermit."
+    "لتشغيل او تعطيل حماية الخاص."
     input_str = event.pattern_match.group(1)
     if input_str == "on":
         if gvarstatus("pmpermit") is None:
@@ -635,32 +635,32 @@ async def pmpermit_on(event):
     pattern="pmmenu (on|off)$",
     command=("pmmenu", plugin_category),
     info={
-        "header": "To turn on or turn off pmmenu.",
+        "header": "لتفعيل او تعطيل قائمة الاختيارات في الخاص.",
         "usage": "{tr}pmmenu on/off",
     },
 )
 async def pmpermit_on(event):
-    "Turn on/off pmmenu."
+    "لتفعيل او تعطيل قائمة الاختيارات في الخاص."
     input_str = event.pattern_match.group(1)
     if input_str == "off":
         if gvarstatus("pmmenu") is None:  
             addgvar("pmmenu", "false")
             await edit_delete(
                 event,
-                "⌔︙  تم تعطيل امر pmmenu لحسابك بنجاح ✅",
+                "⌔︙  تم تعطيل امر قائمة الاختيارات لحسابك بنجاح ✅",
             )
         else:
             await edit_delete(
-                event, "⌔︙ امر pmmenu بالفعل مُعطل لحسابك 🌿"
+                event, "⌔︙ امر قائمة الاختيارات بالفعل مُعطل لحسابك 🌿"
             )
     elif gvarstatus("pmmenu") is not None:
         delgvar("pmmenu")
         await edit_delete(
-            event, "⌔︙  تم تفعيل امر pmmenu لحسابك بنجاح ✅"
+            event, "⌔︙  تم تفعيل امر قائمة الاختيارات لحسابك بنجاح ✅"
         )
     else:
         await edit_delete(
-            event, "⌔︙ امر pmmenu بالفعل مُمكن لحسابك 🌿"
+            event, "⌔︙ امر قائمة الاختيارات بالفعل مُمكن لحسابك 🌿"
         )
 
 
@@ -668,10 +668,10 @@ async def pmpermit_on(event):
     pattern="(a/approve)(?:\s|$)([\s\S]*)",
     command=("approve", plugin_category),
     info={
-        "header": "To approve user to direct message you.",
+        "header": "الموافقه علي ارسال رسايل في الخاص للمستخدم.",
         "usage": [
-            "{tr}a/approve <username/reply reason> in group",
-            "{tr}a/approve <reason> in pm",
+            "{tr}a/approve <اليوزر او المعرف بالرد + السبب> في المجموعه",
+            "{tr}a/approve <السبب> في الخاص",
         ],
     },
 )
@@ -744,18 +744,18 @@ async def approve_p_m(event):  # sourcery no-metrics
     pattern="(da/disapprove)(?:\s|$)([\s\S]*)",
     command=("disapprove", plugin_category),
     info={
-        "header": "To disapprove user to direct message you.",
-        "note": "This command works only for approved users",
-        "options": {"all": "To disapprove all approved users"},
+        "header": "عدم الموافقه علي ارسال رسايل في الخاص للمستخدم.",
+        "note": "هذا الامر يعمل فقط مع الاشخاص الذين تمت الموافقه عليهم",
+        "options": {"all": "لعدم الموافقه علي الكل"},
         "usage": [
-            "{tr}da/disapprove <username/reply> in group",
-            "{tr}da/disapprove in pm",
-            "{tr}da/disapprove all - To disapprove all users.",
+            "{tr}da/disapprove <اليوزر او المعرف بالرد + السبب> في المجموعه ",
+            "{tr}da/disapprove في الخاص",
+            "{tr}da/disapprove all - لعدم الموافقه علي الكل.",
         ],
     },
 )
 async def disapprove_p_m(event):
-    "To disapprove user to direct message you."
+    "عدم الموافقه علي ارسال رسايل في الخاص للمستخدم."
     if gvarstatus("pmpermit") is None:
         return await edit_delete(
             event,
@@ -795,15 +795,15 @@ async def disapprove_p_m(event):
     pattern="block(?:\s|$)([\s\S]*)",
     command=("block", plugin_category),
     info={
-        "header": "To block user to direct message you.",
+        "header": "لحظر الشخص من مراسلتك.",
         "usage": [
-            "{tr}block <username/reply reason> in group",
-            "{tr}block <reason> in pm",
+            "{tr}block <اليوزر او المعرف بالرد + السبب> في المجموعه",
+            "{tr}block <السبب> في الخاص",
         ],
     },
 )
 async def block_p_m(event):
-    "To block user to direct message you."
+    "لحظر الشخص من مراسلتك."
     if gvarstatus("pmpermit") is None:
         return await edit_delete(
             event,
@@ -851,15 +851,15 @@ async def block_p_m(event):
     pattern="unblock(?:\s|$)([\s\S]*)",
     command=("unblock", plugin_category),
     info={
-        "header": "To unblock a user.",
+        "header": "لالغاء حظر المحظورين في الخاص.",
         "usage": [
-            "{tr}unblock <username/reply reason> in group",
-            "{tr}unblock <reason> in pm",
+            "{tr}unblock <اليوزر او المعرف بالرد + السبب> في المجموعه",
+            "{tr}unblock <السبب> في الخاص",
         ],
     },
 )
 async def unblock_pm(event):
-    "To unblock a user."
+    "لالغاء حظر المحظورين في الخاص."
     if gvarstatus("pmpermit") is None:
         return await edit_delete(
             event,
@@ -884,14 +884,14 @@ async def unblock_pm(event):
     pattern="listapproved$",
     command=("listapproved", plugin_category),
     info={
-        "header": "To see list of approved users.",
+        "header": "لرؤية جميع الأشخاص الذين تمت الموافقه عليهم.",
         "usage": [
             "{tr}listapproved",
         ],
     },
 )
 async def approve_p_m(event):
-    "To see list of approved users."
+    "لرؤية جميع الأشخاص الذين تمت الموافقه عليهم."
     if gvarstatus("pmpermit") is None:
         return await edit_delete(
             event,

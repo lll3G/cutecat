@@ -1,3 +1,5 @@
+# by ოᏒ ᏉꂅՈ☻ო »» @YVW_6
+
 import random
 import re
 from datetime import datetime
@@ -511,7 +513,7 @@ async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "⌔︙ - عذرا هذه الخيارات ليست لك انها للمستخدمين الذين يراسلوك 🧸♥"
         return await event.answer(text, cache_time=0, alert=True)
-    text = """⌔︙ حسنا تم ارسال طلبك بنجاح 💕 لا تقم باختيار خيار ثاني \
+    text = """⌔︙ حسنا تم ارسال طلبك بنجاح 💕 لا تقم بأختيار خيار ثاني \
 مالك الحساب مشغول الان  عندما يصبح مالك الحساب متصلا سوف يقول بالرد عليك \
 بعدها يمكنك التحدث بحرية لكن ليس الان"""
     sqllist.add_to_list("pmenquire", event.query.user_id)
@@ -532,7 +534,7 @@ async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "⌔︙ - عذرا هذه الخيارات ليست لك انها للمستخدمين الذين يراسلوك 🧸♥"
         return await event.answer(text, cache_time=0, alert=True)
-    text = """__حسنا لقد قمت بإبلاغ مالك الحساب عندما يصبح متصلا بالانترنت \
+    text = """__حسنا لقد قمت بأبلاغ مالك الحساب عندما يصبح متصلا بالانترنت \
  أو عندما يكون مالك الحساب متاح سوف يقوم بالرد عليك لذلك ارجوك انتظر__\
 
 **لكن في الوقت الحالي لا تكرر ارسال الرسائل حتر لا اضطر لحظرك 🙁💞**"""
@@ -554,8 +556,7 @@ async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "⌔︙ - عذرا هذه الخيارات ليست لك انها للمستخدمين الذين يراسلوك 🧸♥"
         return await event.answer(text, cache_time=0, alert=True)
-    text = """ بالطبع يمكنك التحدث مع مالك الحساب لكن ليس الان نستطيع التكلم في\
-وقت اخر حاليا انا مشغول قليلا عندما اصبح متصلا واذا كنت غير مشغول سأكلمك هذا اكيـد ""
+    text = """__بالطبع يمكنك التحدث مع مالك الحساب لكن ليس الان نستطيع التكلم في وقت اخر حاليا انا مشغول قليلا عندما اصبح متصلا واذا كنت غير مشغول سأكلمك هذا اكيـد__"""
     sqllist.add_to_list("pmchat", event.query.user_id)
     try:
         PM_WARNS = sql.get_collection("pmwarns").json
@@ -669,8 +670,8 @@ async def pmpermit_on(event):
     info={
         "header": "الموافقه علي ارسال رسايل في الخاص للمستخدم.",
         "usage": [
-            "{tr}a/approve اليوزر او المعرف بالرد + السبب في المجموعه ",
-            "{tr}a/approve السبب في الخاص ",
+            "{tr}a/approve <username/reply reason> in group",
+            "{tr}a/approve <reason> in pm",
         ],
     },
 )
@@ -679,7 +680,7 @@ async def approve_p_m(event):  # sourcery no-metrics
     if gvarstatus("pmpermit") is None:
         return await edit_delete(
             event,
-            f"⌔︙ يـجب تفعيـل امـر الحـماية اولا بأرسـال `{cmdhd}pmguard on` لـيشتغل هذا الأمـر",
+            f"⌔︙ يـجب تفعيـل امـر الحـماية اولا بإرسـال `{cmdhd}pmguard on` لـيشتغل هذا الأمـر",
         )
     if event.is_private:
         user = await event.get_chat()
@@ -714,7 +715,7 @@ async def approve_p_m(event):  # sourcery no-metrics
             sqllist.rm_from_list("pmoptions", chat.id)
         await edit_delete(
             event,
-            f"⌔︙  [{user.first_name}](tg://user?id={user.id})\n⌔︙ تـم السـماح له بإرسال الرسائل \nالسبـب : {reason}",
+            f"⌔︙  [{user.first_name}](tg://user?id={user.id})\n⌔︙ تـم السـماح له بأرسال الرسائل \nالسبـب : {reason}",
         )
         try:
             PMMESSAGE_CACHE = sql.get_collection("pmmessagecache").json
@@ -747,9 +748,9 @@ async def approve_p_m(event):  # sourcery no-metrics
         "note": "هذا الامر يعمل فقط مع الاشخاص الذين تمت الموافقه عليهم",
         "options": {"all": "لعدم الموافقه علي الكل"},
         "usage": [
-            "{tr}da/disapprove اليوزر او المعرف بالرد + السبب في المجموعه ",
-            "{tr}da/disapprove السبب في الخاص",
-            "{tr}da/disapprove all -  لعدم الموافقه علي الكل.",
+            "{tr}da/disapprove <username/reply> in group",
+            "{tr}da/disapprove in pm",
+            "{tr}da/disapprove all - To disapprove all users.",
         ],
     },
 )
@@ -758,7 +759,7 @@ async def disapprove_p_m(event):
     if gvarstatus("pmpermit") is None:
         return await edit_delete(
             event,
-            f"⌔︙ يـجب تفعيـل امـر الحـماية اولا بأرسـال `{cmdhd}pmguard on` لـيشتغل هذا الأمـر",
+            f"⌔︙ يـجب تفعيـل امـر الحـماية اولا بإرسـال `{cmdhd}pmguard on` لـيشتغل هذا الأمـر",
         )
     if event.is_private:
         user = await event.get_chat()
@@ -796,8 +797,8 @@ async def disapprove_p_m(event):
     info={
         "header": "لحظر المستخدم من مراسلتك.",
         "usage": [
-            "{tr}block اليوزر او المعرف بالرد + السبب في المجموعه ",
-            "{tr}block block السبب في الخاص ",
+            "{tr}block <username/reply reason> in group",
+            "{tr}block <reason> in pm",
         ],
     },
 )
@@ -806,7 +807,7 @@ async def block_p_m(event):
     if gvarstatus("pmpermit") is None:
         return await edit_delete(
             event,
-            f"⌔︙ يـجب تفعيـل امـر الحـماية اولا بأرسـال `{cmdhd}pmguard on` لـيشتغل هذا الأمـر",
+            f"⌔︙ يـجب تفعيـل امـر الحـماية اولا بإرسـال `{cmdhd}pmguard on` لـيشتغل هذا الأمـر",
         )
     if event.is_private:
         user = await event.get_chat()
@@ -852,8 +853,8 @@ async def block_p_m(event):
     info={
         "header": "لالغاء حظر المستخدم.",
         "usage": [
-            "{tr}unblock اليوزر او المعرف بالرد + السبب في المجموعه ",
-            "{tr}unblock السبب في الخاص ",
+            "{tr}unblock <username/reply reason> in group",
+            "{tr}unblock <reason> in pm",
         ],
     },
 )
@@ -862,7 +863,7 @@ async def unblock_pm(event):
     if gvarstatus("pmpermit") is None:
         return await edit_delete(
             event,
-            f"⌔︙ يـجب تفعيـل امـر الحـماية اولا بأرسـال `{cmdhd}pmguard on` لـيشتغل هذا الأمـر",
+            f"⌔︙ يـجب تفعيـل امـر الحـماية اولا بإرسـال `{cmdhd}pmguard on` لـيشتغل هذا الأمـر",
         )
     if event.is_private:
         user = await event.get_chat()
@@ -894,7 +895,7 @@ async def approve_p_m(event):
     if gvarstatus("pmpermit") is None:
         return await edit_delete(
             event,
-            f"⌔︙ يـجب تفعيـل امـر الحـماية اولا بأرسـال `{cmdhd}pmguard on` لـيشتغل هذا الأمـر",
+            f"⌔︙ يـجب تفعيـل امـر الحـماية اولا بإرسـال `{cmdhd}pmguard on` لـيشتغل هذا الأمـر",
         )
     approved_users = pmpermit_sql.get_all_approved()
     APPROVED_PMs = "**⌔︙ قائـمة الـمسموح لـهم الـحالية\n\n**"

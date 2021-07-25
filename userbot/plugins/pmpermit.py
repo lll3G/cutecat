@@ -87,7 +87,7 @@ async def do_pm_permit_action(event, chat):  # sourcery no-metrics
         await event.client(functions.contacts.BlockRequest(chat.id))
         the_message = f"#المحظورين_الحمايه\
                             \n[{get_display_name(chat)}](tg://user?id={chat.id}) تم حظره\
-                            \n⌔︙ عدد الرسائل: {PM_WARNS[str(chat.id)]}"
+                            \n**عدد الرسائل:** {PM_WARNS[str(chat.id)]}"
         del PM_WARNS[str(chat.id)]
         sql.del_collection("pmwarns")
         sql.del_collection("pmmessagecache")
@@ -119,8 +119,7 @@ async def do_pm_permit_action(event, chat):  # sourcery no-metrics
             remwarns=remwarns,
         )
     elif gvarstatus("pmmenu") is None:
-        USER_BOT_NO_WARN = f"""ههلا بيك {mention} \n مالك الحساب غير موجود حاليا الرجاء الانتظار وعدم تكرار الرسائل. 
-
+        USER_BOT_NO_WARN = f"""ههلا بيك {mention} \n مالك الحساب غير موجود حاليا الرجاء الانتظار وعدم تكرار الرسائل.
 لديك {warns}/{totalwarns} من التحذيرات لا تكرر حتى ما تنحظر من البوت.
 
 اختر احد الخيارات في الاسفل وانتظر الى ان اصبح متصلا بالانترنت ليتم الرد عليك ⬇️⬇️"""
@@ -139,7 +138,7 @@ async def do_pm_permit_action(event, chat):  # sourcery no-metrics
             )
             msg = await results[0].click(chat.id, reply_to=reply_to_id, hide_via=True)
         else:
-            PM_PIC = gvarstatus("pmpermit_pic")
+            PM_PIC = gvarstatus("PM_PIC")
             if PM_PIC:
                 CAT = [x for x in PM_PIC.split()]
                 PIC = list(CAT)
@@ -203,9 +202,9 @@ async def do_pm_options_action(event, chat):
         LOGS.info(str(e))
     sql.del_collection("pmmessagecache")
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
-    USER_BOT_WARN_ZERO = f"⌔︙ اتذكر حذرتك وقلت لك لا تكرر اكثر من خيار ولا ترسل رسائل مجرد انتظر. \
+    USER_BOT_WARN_ZERO = f"**⌔︙ اتذكر حذرتك وقلت لك لا تكرر اكثر من خيار ولا ترسل رسائل مجرد انتظر. \
 تعتقد راح اخليك تكرر لا اسف راح احظرك من الحساب. \
-حاليا متكدر بعد تتكلم الى ان ياتي صاحب الحساب ويقوم بالغاء الحظر. 🙂💘"
+حاليا متكدر بعد تتكلم الى ان ياتي صاحب الحساب ويقوم بالغاء الحظر. 🙂💘**"
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
     the_message = f"#حـماية الـخاص\
@@ -253,14 +252,14 @@ async def do_pm_enquire_action(event, chat):
         LOGS.info(str(e))
     sql.del_collection("pmmessagecache")
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
-    USER_BOT_WARN_ZERO = f"⌔︙ اتذكر حذرتك وقلت لك لا تكرر اكثر من خيار ولا ترسل رسائل مجرد انتظر. \
+    USER_BOT_WARN_ZERO = f"**⌔︙ اتذكر حذرتك وقلت لك لا تكرر اكثر من خيار ولا ترسل رسائل مجرد انتظر. \
 تعتقد راح اخليك تكرر لا اسف راح احظرك من الحساب. \
-حاليا متكدر بعد تتكلم الى ان ياتي صاحب الحساب ويقوم بالغاء الحظر. 🙂💘"
+حاليا متكدر بعد تتكلم الى ان ياتي صاحب الحساب ويقوم بالغاء الحظر. 🙂💘**"
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
     the_message = f"#حـماية الـخاص\
                 \n[{get_display_name(chat)}](tg://user?id={chat.id}) تـم حـظره\
-                \nالسبب: هو/هي لم يقم بالتوقف عن ارسال الرسائل والتكرار"
+                \n**السبب:** هو/هي لم يقم بالتوقف عن ارسال الرسائل والتكرار"
     sqllist.rm_from_list("pmenquire", chat.id)
     try:
         return await event.client.send_message(
@@ -303,7 +302,7 @@ async def do_pm_request_action(event, chat):
         LOGS.info(str(e))
     sql.del_collection("pmmessagecache")
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
-    USER_BOT_WARN_ZERO = f"**اتذكر حذرتك وقلت لك لا تكرر اكثر من خيار ولا ترسل رسائل مجرد انتظر. \
+    USER_BOT_WARN_ZERO = f"**⌔︙ اتذكر حذرتك وقلت لك لا تكرر اكثر من خيار ولا ترسل رسائل مجرد انتظر. \
 تعتقد راح اخليك تكرر لا اسف راح احظرك من الحساب. \
 حاليا متكدر بعد تتكلم الى ان ياتي صاحب الحساب ويقوم بالغاء الحظر. 🙂💘**"
     await event.reply(USER_BOT_WARN_ZERO)
@@ -359,8 +358,8 @@ async def do_pm_chat_action(event, chat):
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
     the_message = f"#حـماية الـخاص\
-                \n[{get_display_name(chat)}](tg://user?id={chat.id}) is blocked\
-                \n**السبـب::** __He/She select opted for the chat option but didn't wait after being told also so blocked.__"
+                \n[{get_display_name(chat)}](tg://user?id={chat.id}) تـم حـظره\
+                \n**السبب:** هو/هي لم يقم بالتوقف عن ارسال الرسائل والتكرار"
     sqllist.rm_from_list("pmchat", chat.id)
     try:
         return await event.client.send_message(
@@ -387,9 +386,9 @@ async def do_pm_spam_action(event, chat):
 حاليا متكدر بعد تتكلم الى ان ياتي صاحب الحساب ويقوم بالغاء الحظر. 🙂💘**"
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
-    the_message = f"#BLOCKED_PM\
+    the_message = f"#حـماية الـخاص\
                             \n[{get_display_name(chat)}](tg://user?id={chat.id}) تـم حـظره\
-                            \n**Reason:** هو/هي لم يقم بالتوقف عن ارسال الرسائل والتكرار."
+                            \n**السبب:** هو/هي لم يقم بالتوقف عن ارسال الرسائل والتكرار."
     sqllist.rm_from_list("pmspam", chat.id)
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
     try:
@@ -457,7 +456,7 @@ async def you_dm_other(event):
     start_date = str(datetime.now().strftime("%B %d, %Y"))
     if not pmpermit_sql.is_approved(chat.id) and str(chat.id) not in PM_WARNS:
         pmpermit_sql.approve(
-            chat.id, get_display_name(chat), start_date, chat.username, "لـم يـتم رفـضه"
+            chat.id, get_display_name(chat), start_date, chat.username, "For Outgoing"
         )
         try:
             PMMESSAGE_CACHE = sql.get_collection("pmmessagecache").json
@@ -478,7 +477,7 @@ async def you_dm_other(event):
 @catub.tgbot.on(CallbackQuery(data=re.compile(rb"show_pmpermit_options")))
 async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
-        text = "⌔︙ - عذرا هذه الخيارات ليست لك انها للمستخدمين الذين يراسلوك 😐⚕️"
+        text = "⌔︙ - عذرا هذه الخيارات ليست لك انها للمستخدمين الذين يراسلوك 😐⚕"
         return await event.answer(text, cache_time=0, alert=True)
     text = f"""حسنا الان بإمكانك اختيار احد الخيارات في الاسفل للتواصل مع , {mention}.
 ⌔︙ اختر بهدوء خيار واحد فقط لنعرف سبب قدومك هنا 🤍
@@ -643,7 +642,7 @@ async def pmpermit_on(event):
     "لتفعيل او تعطيل قائمة الاختيارات في الخاص."
     input_str = event.pattern_match.group(1)
     if input_str == "off":
-        if gvarstatus("pmmenu") is None:  
+        if gvarstatus("pmmenu") is None:
             addgvar("pmmenu", "false")
             await edit_delete(
                 event,
@@ -665,18 +664,18 @@ async def pmpermit_on(event):
 
 
 @catub.cat_cmd(
-    pattern="(a/approve)(?:\s|$)([\s\S]*)",
+    pattern="(a|approve)(?:\s|$)([\s\S]*)",
     command=("approve", plugin_category),
     info={
         "header": "الموافقه علي ارسال رسايل في الخاص للمستخدم.",
         "usage": [
             "{tr}a/approve <اليوزر او المعرف بالرد + السبب> في المجموعه",
-            "{tr}a/approve <السبب> في الخاص",
+            "{tr}a/approve <السبب> في الخاص ",
         ],
     },
 )
 async def approve_p_m(event):  # sourcery no-metrics
-    "To approve user to pm"
+    "الموافقه علي ارسال رسايل في الخاص للمستخدم."
     if gvarstatus("pmpermit") is None:
         return await edit_delete(
             event,
@@ -691,7 +690,7 @@ async def approve_p_m(event):  # sourcery no-metrics
             return
     if not reason:
         reason = "لـم يـذكر"
-    try: 
+    try:
         PM_WARNS = sql.get_collection("pmwarns").json
     except AttributeError:
         PM_WARNS = {}
@@ -741,16 +740,16 @@ async def approve_p_m(event):  # sourcery no-metrics
 
 
 @catub.cat_cmd(
-    pattern="(da/disapprove)(?:\s|$)([\s\S]*)",
+    pattern="(da|disapprove)(?:\s|$)([\s\S]*)",
     command=("disapprove", plugin_category),
     info={
-        "header": "عدم الموافقه علي ارسال رسايل في الخاص للمستخدم.",
+        "header": "عدم الموافقه علي إرسال رسائل في الخاص للمستخدم.",
         "note": "هذا الامر يعمل فقط مع الاشخاص الذين تمت الموافقه عليهم",
         "options": {"all": "لعدم الموافقه علي الكل"},
         "usage": [
-            "{tr}da/disapprove <اليوزر او المعرف بالرد + السبب> في المجموعه ",
+            "{tr}da/disapprove <اليوزر او المعرف بالرد + السبب> في المجموعه",
             "{tr}da/disapprove في الخاص",
-            "{tr}da/disapprove all - لعدم الموافقه علي الكل.",
+            "{tr}da/disapprove all -  لعدم الموافقه علي الكل.",
         ],
     },
 )
@@ -767,17 +766,17 @@ async def disapprove_p_m(event):
 
     else:
         reason = event.pattern_match.group(2)
-        if reason != "الكل":
+        if reason != "all":
             user, reason = await get_user_from_event(event, secondgroup=True)
             if not user:
                 return
-    if reason == "الكل":
+    if reason == "all":
         pmpermit_sql.disapprove_all()
         return await edit_delete(
             event, "⌔︙ حـسنا تـم رفـض الـجميع بـنجاح 🧸♥"
         )
     if not reason:
-        reason = "لـم يـذكر"
+        reason = "لـم يـذكر."
     if pmpermit_sql.is_approved(user.id):
         pmpermit_sql.disapprove(user.id)
         await edit_or_reply(
@@ -795,15 +794,15 @@ async def disapprove_p_m(event):
     pattern="block(?:\s|$)([\s\S]*)",
     command=("block", plugin_category),
     info={
-        "header": "لحظر الشخص من مراسلتك.",
+        "header": "لحظر المستخدم من مراسلتك.",
         "usage": [
             "{tr}block <اليوزر او المعرف بالرد + السبب> في المجموعه",
-            "{tr}block <السبب> في الخاص",
+            "{tr}block block <السبب> في الخاص ",
         ],
     },
 )
 async def block_p_m(event):
-    "لحظر الشخص من مراسلتك."
+    "لحظر المستخدم من مراسلتك."
     if gvarstatus("pmpermit") is None:
         return await edit_delete(
             event,
@@ -817,7 +816,7 @@ async def block_p_m(event):
         if not user:
             return
     if not reason:
-        reason = "لـم يتـم ذكـره"
+        reason = "لـم يـذكر."
     try:
         PM_WARNS = sql.get_collection("pmwarns").json
     except AttributeError:
@@ -851,15 +850,15 @@ async def block_p_m(event):
     pattern="unblock(?:\s|$)([\s\S]*)",
     command=("unblock", plugin_category),
     info={
-        "header": "لالغاء حظر المحظورين في الخاص.",
+        "header": "لالغاء حظر المستخدم.",
         "usage": [
             "{tr}unblock <اليوزر او المعرف بالرد + السبب> في المجموعه",
-            "{tr}unblock <السبب> في الخاص",
+            "{tr}unblock <السبب> في الخاص ",
         ],
     },
 )
 async def unblock_pm(event):
-    "لالغاء حظر المحظورين في الخاص."
+    "لالغاء حظر المستخدم."
     if gvarstatus("pmpermit") is None:
         return await edit_delete(
             event,
@@ -873,7 +872,7 @@ async def unblock_pm(event):
         if not user:
             return
     if not reason:
-        reason = "لم يتم ذكر السبـب"
+        reason = "لـم يـذكر."
     await event.client(functions.contacts.UnblockRequest(user.id))
     await event.edit(
         f"[{user.first_name}](tg://user?id={user.id}) \nتم الغاء حظره بنجاح يمكنه التكلم معك الان 🧸♥\nالسبـب: {reason}"
@@ -898,12 +897,12 @@ async def approve_p_m(event):
             f"⌔︙ يـجب تفعيـل امـر الحـماية اولا بأرسـال `{cmdhd}pmguard on` لـيشتغل هذا الأمـر",
         )
     approved_users = pmpermit_sql.get_all_approved()
-    APPROVED_PMs = "⌔︙ قائـمة الـمسموح لـهم الـحالية\n\n"
+    APPROVED_PMs = "**⌔︙ قائـمة الـمسموح لـهم الـحالية\n\n**"
     if len(approved_users) > 0:
         for user in approved_users:
-            APPROVED_PMs += f"• 👤 {_format.mentionuser(user.first_name , user.user_id)}\n⌔︙ الأيدي: `{user.user_id}`\n⌔︙ الـمعرف: @{user.username}\n⌔︙ التاريـخ: {user.date}\n⌔︙ السبـب: {user.reason}\n\n"
+            APPROVED_PMs += f"• 👤 {_format.mentionuser(user.first_name , user.user_id)}\n⌔︙ الأيدي: `{user.user_id}`\n⌔︙ الـمعرف: @{user.username}\n⌔︙ البروفايل: @{user.mention}\n⌔︙ التاريـخ: {user.date}\n⌔︙ السبـب: {user.reason}\n\n"
     else:
-        APPROVED_PMs = "انت لم توافق على اي شخص بالاصل 🧸♥️"
+        APPROVED_PMs = "`انت لم توافق على اي شخص بالاصل 🧸♥️`"
     await edit_or_reply(
         event,
         APPROVED_PMs,

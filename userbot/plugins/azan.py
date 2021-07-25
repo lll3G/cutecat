@@ -10,9 +10,9 @@ plugin_category = "extra"
     pattern="azan(?: |$)(.*)",
     command=("azan", plugin_category),
     info={
-        "header": "Shows you the Islamic prayer times of the given city name.",
-        "note": "you can set default city by using {tr}setcity command.",
-        "usage": "{tr}azan <city>",
+        "header": "يوضح لك أوقات الصلاة الإسلامية باسم المدينة المعطاة.",
+        "note": "يمكنك تعيين المدينة الافتراضية باستخدام الأمر {tr} setcity.",
+        "usage": "{tr}azan <اسم المدينة باللغة الانجليزية>",
         "examples": "{tr}azan baghdad ",
     },
 )
@@ -20,7 +20,7 @@ async def get_adzan(adzan):
     if not adzan.pattern_match.group(1):
         LOCATION = PLACE
         if not LOCATION:
-            await adzan.edit("Please specify a city or a state.")
+            await adzan.edit("يرجى تحديد مدينة أو دولة باللغة الانجليزية.")
             return
     else:
         LOCATION = adzan.pattern_match.group(1)
@@ -38,20 +38,20 @@ async def get_adzan(adzan):
     timezone = parsed["results"]["location"]["timezone"]
     date = parsed["results"]["datetime"][0]["date"]["gregorian"]
 
-    آمـسـآگ = parsed["results"]["datetime"][0]["times"]["Imsak"]
-    آلفجر = parsed["results"]["datetime"][0]["times"]["Fajr"]
-    آلظـهہ‏‏ر = parsed["results"]["datetime"][0]["times"]["Dhuhr"]
-    آلعصـر = parsed["results"]["datetime"][0]["times"]["Asr"]
-    آلمـغرب = parsed["results"]["datetime"][0]["times"]["Maghrib"]
-    آلعشـآء = parsed["results"]["datetime"][0]["times"]["Isha"]
+    imsak = parsed["results"]["datetime"][0]["times"]["Imsak"]
+    subuh = parsed["results"]["datetime"][0]["times"]["Fajr"]
+    zuhur = parsed["results"]["datetime"][0]["times"]["Dhuhr"]
+    ashar = parsed["results"]["datetime"][0]["times"]["Asr"]
+    maghrib = parsed["results"]["datetime"][0]["times"]["Maghrib"]
+    isya = parsed["results"]["datetime"][0]["times"]["Isha"]
 
     result = (
-        f"**جدول صـلوآت آلمـسـلمـيـﮯن 🌹🌹**:\n"
+        f"**جدول صـلوآت 🌷🌹** :\n"
         f"📅 `{date} | {timezone}`\n"
         f"🌏 `{city} | {country}`\n\n"
         f"**آمـسـآگ :** `{imsak}`\n"
         f"**آلفجر :** `{subuh}`\n"
-        f"**آلظـهہ‏‏ر :** `{zuhur}`\n"
+        f"**آلظـهر :** `{zuhur}`\n"
         f"**آلعصـر :** `{ashar}`\n"
         f"**آلمـغرب :** `{maghrib}`\n"
         f"**آلعشـآء :** `{isya}`\n"

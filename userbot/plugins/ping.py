@@ -36,7 +36,7 @@ async def _(event):
         ms = (end - start).microseconds / 1000
         await catevent.edit(f"╭         ─┉─ • ─┉─       ╮\n"
             f"<b><i>  📡 Ⓟⓞⓝⓖ</(b></i>\n  🩸 {ms} <b><i>ms\n  🩸 Ⓑⓞⓣ ⓞⓕ {hmention}</b></i>\n"
-            f"╰        ─┉─¡! • !¡─┉─       ╯\n",
+            f"╰        ─┉─¡! • !¡─┉─     ╯\n",
             parse_mode="html",
         )
 

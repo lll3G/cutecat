@@ -38,23 +38,23 @@ async def get_adzan(adzan):
     timezone = parsed["results"]["location"]["timezone"]
     date = parsed["results"]["datetime"][0]["date"]["gregorian"]
 
-    imsak = parsed["results"]["datetime"][0]["times"]["Imsak"]
-    subuh = parsed["results"]["datetime"][0]["times"]["Fajr"]
-    zuhur = parsed["results"]["datetime"][0]["times"]["Dhuhr"]
-    ashar = parsed["results"]["datetime"][0]["times"]["Asr"]
-    maghrib = parsed["results"]["datetime"][0]["times"]["Maghrib"]
-    isya = parsed["results"]["datetime"][0]["times"]["Isha"]
+    آمـسـآگ = parsed["results"]["datetime"][0]["times"]["Imsak"]
+    آلفجر = parsed["results"]["datetime"][0]["times"]["Fajr"]
+    آلظـهہ‏‏ر = parsed["results"]["datetime"][0]["times"]["Dhuhr"]
+    آلعصـر = parsed["results"]["datetime"][0]["times"]["Asr"]
+    آلمـغرب = parsed["results"]["datetime"][0]["times"]["Maghrib"]
+    آلعشـآء = parsed["results"]["datetime"][0]["times"]["Isha"]
 
     result = (
-        f"**Jadwal Sholat 🌹🌹**:\n"
+        f"**جدول صـلوآت آلمـسـلمـيـﮯن 🌹🌹**:\n"
         f"📅 `{date} | {timezone}`\n"
         f"🌏 `{city} | {country}`\n\n"
-        f"**Imsak :** `{imsak}`\n"
-        f"**Subuh :** `{subuh}`\n"
-        f"**Zuhur :** `{zuhur}`\n"
-        f"**Ashar :** `{ashar}`\n"
-        f"**Maghrib :** `{maghrib}`\n"
-        f"**Isya :** `{isya}`\n"
+        f"**آمـسـآگ :** `{imsak}`\n"
+        f"**آلفجر :** `{subuh}`\n"
+        f"**آلظـهہ‏‏ر :** `{zuhur}`\n"
+        f"**آلعصـر :** `{ashar}`\n"
+        f"**آلمـغرب :** `{maghrib}`\n"
+        f"**آلعشـآء :** `{isya}`\n"
     )
 
     await adzan.edit(result)

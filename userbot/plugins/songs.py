@@ -59,7 +59,7 @@ async def _(event):
     else:
         return await edit_or_reply(event, "**⌔ ︙ما الذي تريد أن أبحث عنه  **")
     cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    catevent = await edit_or_reply(event, "**⌔︙ جاري تحميل إنتظر قليلا  **")
+    catevent = await edit_or_reply(event, "**⌔︙ جاري البحث عن الاغنية إنتظر رجاءًا  🎧**")
     video_link = await yt_search(str(query))
     if not url(video_link):
         return await catevent.edit(
@@ -90,7 +90,7 @@ async def _(event):
         return await catevent.edit(
             f"**⌔︙ عـذرًا لم أستطع إيجاد الأغنية أو الفيديو لـ  ** `{query}`"
         )
-    await catevent.edit("**⌔︙  المطلوب لقد وجدت إنتظر قليلا  ⏱**")
+    await catevent.edit("**⌔︙  لقد وجدت الاغنية المطلوبة انتظر قليلا  ⏱**")
     catthumb = Path(f"{catname}.jpg")
     if not os.path.exists(catthumb):
         catthumb = Path(f"{catname}.webp")
@@ -128,7 +128,7 @@ async def delete_messages(event, chat, from_message):
         "header": "للحصول على أغاني الفيديو من اليوتيوب.",
         "description": "هذا الامر يقوم بالبحث عن الاغنيه علي اليوتيوب ويرسلها علي شكل فيديو 🌹🌹",
         "usage": "{tr}vsong <اسم الاغنيه>",
-        "examples": "{tr}vsong يالهوي",
+        "examples": "{tr}vsong ياحبيبتي يامصر",
     },
 )
 async def _(event):

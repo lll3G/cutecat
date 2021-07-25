@@ -141,9 +141,9 @@ async def _(event):
         if reply.message:
             query = reply.messag
     else:
-        return await edit_or_reply(event, "**⌔︙ يجـب وضـع  الأمر وبجانبه إسم الأغنية  ")
+        return await edit_or_reply(event, "**⌔︙ يجـب وضـع  الأمر وبجانبه إسم الأغنية  **")
     cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    catevent = await edit_or_reply(event, "**⌔︙ جار البحث عن الفيديو علي اليوتيوب 😇😇  ")
+    catevent = await edit_or_reply(event, "**⌔︙ جار البحث عن الفيديو علي اليوتيوب 😇😇  **")
     video_link = await yt_search(str(query))
     if not url(video_link):
         return await catevent.edit(

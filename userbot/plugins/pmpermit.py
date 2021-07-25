@@ -669,7 +669,7 @@ async def pmpermit_on(event):
     info={
         "header": "الموافقه علي ارسال رسايل في الخاص للمستخدم.",
         "usage": [
-            "{tr}a/approve اليوزر او المعرف بالرد + السبب> في المجموعه> ",
+            "{tr}a/approve اليوزر او المعرف بالرد + السبب في المجموعه ",
             "{tr}a/approve السبب> في الخاص> ",
         ],
     },
@@ -714,7 +714,7 @@ async def approve_p_m(event):  # sourcery no-metrics
             sqllist.rm_from_list("pmoptions", chat.id)
         await edit_delete(
             event,
-            f"⌔︙  [{user.first_name}](tg://user?id={user.id})\n⌔︙ تـم السـماح له بأرسال الرسائل \nالسبـب : {reason}",
+            f"⌔︙  [{user.first_name}](tg://user?id={user.id})\n⌔︙ تـم السـماح له بإرسال الرسائل \nالسبـب : {reason}",
         )
         try:
             PMMESSAGE_CACHE = sql.get_collection("pmmessagecache").json
@@ -781,7 +781,7 @@ async def disapprove_p_m(event):
         pmpermit_sql.disapprove(user.id)
         await edit_or_reply(
             event,
-            f"[{user.first_name}](tg://user?id={user.id})\n⌔︙ تـم رفضـه مـن أرسـال الـرسائل\nالسبـب: {reason}",
+            f"[{user.first_name}](tg://user?id={user.id})\n⌔︙ تـم رفضـه مـن إرسـال الـرسائل\nالسبـب: {reason}",
         )
     else:
         await edit_delete(

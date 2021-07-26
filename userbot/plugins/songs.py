@@ -221,7 +221,7 @@ async def _(event):
                 return await catevent.edit(
                     "خطأ أثناء تحديد الأغنية. حاول استخدام رسالة صوتية طويلة ٥-١٠ ثواني."
                 )
-            await catevent.edit("`⌔ انتظر...`")
+            await catevent.edit("`⌔ انتظر يتم تعريف المقطع الصوتي...`")
             result = await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:

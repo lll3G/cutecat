@@ -234,7 +234,7 @@ async def autobio_loop():
     AUTOBIOSTART = gvarstatus("autobio") == "true"
     while AUTOBIOSTART:
         DMY = time.strftime("%d.%m.%Y")
-        HM = time.strftime("%I:%M")
+        HM = time.strftime("%I:%M:%S")
         bio = f"𖠕 {DMY} »» {DEFAULTUSERBIO} »» ☻ {HM}"
         LOGS.info(bio)
         try:

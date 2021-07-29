@@ -38,7 +38,7 @@ from . import (
 )
 
 plugin_category = "tools"
-DEFAULTUSERBIO = DEFAULT_BIO or "𝒕𝒊𝒎𝒆 𝒏𝒐𝒘"
+DEFAULTUSERBIO = DEFAULT_BIO or "Creativity is intelligence having fun"
 DEFAULTUSER = AUTONAME or Config.ALIVE_NAME
 LOGS = logging.getLogger(__name__)
 
@@ -219,7 +219,7 @@ async def autoname_loop():
     while AUTONAMESTART:
         DM = time.strftime("%d-%m-%y")
         HM = time.strftime("%I:%M")
-        name = f"𖠕 {HM} »» {DEFAULTUSER}"
+        name = f"🍀 {HM} - {DEFAULTUSER}"
         LOGS.info(name)
         try:
             await catub(functions.account.UpdateProfileRequest(first_name=name))
@@ -234,8 +234,7 @@ async def autobio_loop():
     AUTOBIOSTART = gvarstatus("autobio") == "true"
     while AUTOBIOSTART:
         DMY = time.strftime("%d.%m.%Y")
-        HM = time.strftime("%I:%M:%S")
-        bio = f"𖠕 {DMY} »» {DEFAULTUSERBIO} »» ☻ {HM}"
+        bio = f"🍀⃝⃝⃟🍂 {DMY} - {DEFAULTUSERBIO}"
         LOGS.info(bio)
         try:
             await catub(functions.account.UpdateProfileRequest(about=bio))

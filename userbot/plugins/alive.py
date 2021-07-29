@@ -87,7 +87,7 @@ async def amireallyalive(event):
         cat_caption += f"┃‣ {EMOJI} **Uptime :** `{uptime}`\n"
         cat_caption += f"┗━━━━━━━✦❘༻༺❘✦━━━━━━━┛\n"
         cat_caption += f"┏━━━━━✦❘༻༺❘✦━━━━━┓\n┃‣ **📡 ᴘɪɴɢ :** {ms} ms \n┗━━━━━✦❘༻༺❘✦━━━━━┛\n"
-        cat_caption += f" ‣** 🏹 ო☻ɗ ცᎩ `{my_first}`**"
+        cat_caption += f" ‣** 🍀⃝⃝⃟🍂 ო☻ɗ ცᎩ `{my_first}`**"
         await event.client.send_file(
             event.chat_id,
             PIC,

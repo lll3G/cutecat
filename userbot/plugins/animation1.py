@@ -123,8 +123,8 @@ async def _(event):
     "animation command"
     animation_interval = 0.7
     animation_ttl = range(12)
-    event = await edit_or_reply(event, "جاري قتل الضحيه....")
-    sleep(4)
+    event = await edit_or_reply(event, "`جاري قتل الضحيه....`")
+    sleep(0.05)
     await event.edit("0%")
     number = 1
     await event.edit(str(number) + "%   ▎")
@@ -438,7 +438,7 @@ async def _(event):
         "------------------>",
         "------>;(^。^)ノ",
         "(￣ー￣) مـات",
-        f"**`تم قتل الضحيه بواسطه طلقه رأس 😈😈...`\n #هيد شوتت 😹\n**",
+        f"**`تم قتل الضحيه بواسطه طلقه رأس 😈😈`\n\n #هيد شوتت 😹\n**",
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)

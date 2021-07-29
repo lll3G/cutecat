@@ -38,7 +38,7 @@ from . import (
 )
 
 plugin_category = "tools"
-DEFAULTUSERBIO = DEFAULT_BIO or "Creativity is intelligence having fun"
+DEFAULTUSERBIO = DEFAULT_BIO or "𝒏𝒐 𝒈𝒂𝒊𝒏 𝒘𝒊𝒕𝒉𝒐𝒖𝒕 𝒑𝒂𝒊𝒏"
 DEFAULTUSER = AUTONAME or Config.ALIVE_NAME
 LOGS = logging.getLogger(__name__)
 

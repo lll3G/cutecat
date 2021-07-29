@@ -1,6 +1,6 @@
 import asyncio
 from collections import deque
-
+from time import sleep
 from . import catub, edit_or_reply, mention
 
 plugin_category = "fun"
@@ -119,9 +119,9 @@ async def _(event):
         "usage": "{tr}kill",
     },
 )
-async def typewriter(typew):
-    typew.pattern_match.group(1)
-    await typew.edit("`Mau Gue Santet Lu Broo?..`")
+async def _(event):
+    "animation command"
+    event = await edit_or_reply(event, "ready to die dude.....")
     sleep(4)
     await typew.edit("0%")
     number = 1

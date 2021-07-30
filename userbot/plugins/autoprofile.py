@@ -232,7 +232,7 @@ async def autoname_loop():
 async def autobio_loop():
     AUTOBIOSTART = gvarstatus("autobio") == "true"
     while AUTOBIOSTART:
-        DMY = time.strftime("%d / %m / %Y")
+        DMY = time.strftime("%d/%m/%Y")
         bio = f"🍀⃝⃝⃟🍂 {DMY} - {DEFAULTUSERBIO}"
         LOGS.info(bio)
         try:

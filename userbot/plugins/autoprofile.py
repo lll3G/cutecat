@@ -38,7 +38,7 @@ from . import (
 )
 
 plugin_category = "tools"
-DEFAULTUSERBIO = DEFAULT_BIO or "𝒏𝒐 𝒈𝒂𝒊𝒏 𝒘𝒊𝒕𝒉𝒐𝒖𝒕 𝒑𝒂𝒊𝒏"
+DEFAULTUSERBIO = DEFAULT_BIO or "No gain without pain"
 DEFAULTUSER = AUTONAME or Config.ALIVE_NAME
 LOGS = logging.getLogger(__name__)
 

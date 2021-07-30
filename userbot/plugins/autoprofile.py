@@ -217,7 +217,6 @@ async def bloom_pfploop():
 async def autoname_loop():
     AUTONAMESTART = gvarstatus("autoname") == "true"
     while AUTONAMESTART:
-        DM = time.strftime("%d-%m-%y")
         HM = time.strftime("%I:%M")
         name = f"🍀 {HM} - {DEFAULTUSER}"
         LOGS.info(name)
@@ -233,7 +232,7 @@ async def autoname_loop():
 async def autobio_loop():
     AUTOBIOSTART = gvarstatus("autobio") == "true"
     while AUTOBIOSTART:
-        DMY = time.strftime("%d.%m.%Y")
+        DMY = time.strftime("%d|%m|%Y")
         bio = f"🍀⃝⃝⃟🍂 {DMY} - {DEFAULTUSERBIO}"
         LOGS.info(bio)
         try:

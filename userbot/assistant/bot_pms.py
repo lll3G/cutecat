@@ -90,17 +90,17 @@ async def bot_start(event):
         customstrmsg = gvarstatus("START_TEXT") or None
         if customstrmsg is not None:
             start_msg = customstrmsg.format(
-                mention=mention,
-                first=first,
-                last=last,
-                fullname=fullname,
-                username=username,
-                userid=userid,
-                my_first=my_first,
-                my_last=my_last,
-                my_fullname=my_fullname,
-                my_username=my_username,
-                my_mention=my_mention,
+                mention=await client.get_entity('mention'),
+                first=await client.get_entity('first'),
+                last=await client.get_entity('last'),
+                fullname=await client.get_entity('fullname'),
+                username=await client.get_entity('username'),
+                userid=await client.get_entity('userid'),
+                my_first=await client.get_entity('my_first'),
+                my_last=await client.get_entity('my_last'),
+                my_fullname=await client.get_entity('my_fullname'),
+                my_username=await client.get_entity('my_username'),
+                my_mention=await client.get_entity('my_mention'),
             )
         else:
             start_msg = f"ارسل رسالتك وسيتم الرد عليك 💫🔥."

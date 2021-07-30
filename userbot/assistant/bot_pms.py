@@ -103,7 +103,10 @@ async def bot_start(event):
                 my_mention=await client.get_entity('my_mention'),
             )
         else:
-            start_msg = f"ارسل رسالتك وسيتم الرد عليك 💫🔥."
+            start_msg = f"👤 مرحبا 𖤱 {mention} 𖦴 ,\
+                        \n\n🩸 معرفك 𖤱 {username} 𖦴 .\
+                        \n\n🍒 الايدي 𖤱 `{userid}` 𖦴 .\
+                        \n\nارسل رسالتك وسيتم الرد عليك 💫🔥 ."
         buttons = None
     else:
         start_msg = "Hey Master!\

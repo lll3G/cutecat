@@ -221,6 +221,7 @@ async def _(event):
     number = number + 1
     await event.edit(str(number) + "%   ███████▉")
     number = number + 1
+     sleep (0.01)
     await event.edit(str(number) + "%   ████████")
     number = number + 1
     await event.edit(str(number) + "%   ████████▎")
@@ -321,6 +322,7 @@ async def _(event):
     number = number + 1
     await event.edit(str(number) + "%   ████████████████▎")
     number = number + 1
+     sleep (0.01)
     await event.edit(str(number) + "%   ████████████████▍")
     number = number + 1
     await event.edit(str(number) + "%   ████████████████▌")

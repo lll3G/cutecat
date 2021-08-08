@@ -63,7 +63,7 @@ async def startupmessage():
         if BOTLOG:
             Config.CATUBLOGO = await catub.tgbot.send_file(
                 BOTLOG_CHATID,
-                "https://telegra.ph/file/7afa83746cc8010b86d34.mp4",
+                "https://telegra.ph/file/614157ae8df57adcf0057.jpg",
                 caption="**Your bot has been started successfully.**",
                 buttons=[(Button.url("DEV", "https://t.me/YVW_6"),)],
             )

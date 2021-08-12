@@ -174,7 +174,7 @@ async def _(event):
         return await catevent.edit(
             f"**⌔︙ عـذرًا لم أستطع إيجاد أي فيديو او صوت متعلق بـ ** `{query}`"
         )
-    await catevent.edit("**⌔︙لقد وجدت الفديو المطلوب انتظر قليلا  **")
+    await catevent.edit("**⌔︙ لقد وجدت الفديو المطلوب انتظر قليلا  **")
     catthumb = Path(f"{catname}.jpg")
     if not os.path.exists(catthumb):
         catthumb = Path(f"{catname}.webp")
@@ -210,7 +210,7 @@ async def _(event):
         return await edit_delete(event, "```⌔︙ قم بالرد على الرسالة الصوتية لعكس البحث عن هذه الأغنية .```")
     reply_message = await event.get_reply_message()
     chat = "@auddbot"
-    catevent = await edit_or_reply(event, "```⌔︙جاري تعريف المقطع الصوتي```")
+    catevent = await edit_or_reply(event, "```⌔︙ جاري تعريف المقطع الصوتي```")
     async with event.client.conversation(chat) as conv:
         try:
             await conv.send_message("/start")
@@ -221,11 +221,11 @@ async def _(event):
                 return await catevent.edit(
                     "خطأ أثناء تحديد الأغنية. حاول استخدام رسالة صوتية طويلة ٥-١٠ ثواني."
                 )
-            await catevent.edit("`⌔ انتظر يتم تعريف المقطع الصوتي...`")
+            await catevent.edit("`⌔︙ انتظر يتم تعريف المقطع الصوتي...`")
             result = await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await catevent.edit("```⌔ قم بالغاء حظر(@auddbot) وحاول مرة اخري```")
+            await catevent.edit("```⌔︙ قم بالغاء حظر(@auddbot) وحاول مرة اخري```")
             return
     namem = f"**Song Name : **`{result.text.splitlines()[0]}`\
         \n\n**Details : **__{result.text.splitlines()[2]}__"

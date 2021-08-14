@@ -218,7 +218,7 @@ async def autoname_loop():
     AUTONAMESTART = gvarstatus("autoname") == "true"
     while AUTONAMESTART:
         HM = time.strftime("%I:%M")
-        name = f"⌚️{HM} ||› {DEFAULTUSER}"
+        name = f"🍀 {HM} ||› {DEFAULTUSER}"
         LOGS.info(name)
         try:
             await catub(functions.account.UpdateProfileRequest(first_name=name))
@@ -233,7 +233,7 @@ async def autobio_loop():
     AUTOBIOSTART = gvarstatus("autobio") == "true"
     while AUTOBIOSTART:
         DMY = time.strftime("%d/%m/%Y")
-        bio = f"📅 {DMY} - {DEFAULTUSERBIO}"
+        bio = f"📅 {DMY} ||› {DEFAULTUSERBIO}"
         LOGS.info(bio)
         try:
             await catub(functions.account.UpdateProfileRequest(about=bio))

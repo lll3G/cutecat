@@ -74,18 +74,13 @@ async def amireallyalive(event):
         await edit_or_reply(event, caption)
 
 
-temp = "{ALIVE_TEXT}
-
-┏━━━━━━✦❘༻༺❘✦━━━━━━┓
-┃{EMOJI} ʙɪʟʟɪ ᴠᴇʀꜱɪᴏɴ : {catver}
-┃{EMOJI} ᴀʟɪᴠᴇ ꜱɪɴᴄᴇ : {uptime}
-┃{EMOJI} ꜱᴇɴꜱᴇɪ : {mention}
-┃{EMOJI} ꜱᴛᴀᴛᴜꜱ : {dbhealth}
-┗━━━━━━✦❘༻༺❘✦━━━━━━┛
-┏━━━━━━✦❘༻༺❘✦━━━━━━┓
-┃ ⁭⁫     {EMOJI}📡 ᴘɪɴɢ : {ping} ms
-┗━━━━━━✦❘༻༺❘✦━━━━━━┛
-        ↠━━━━━ღ◆ღ━━━━━↞"
+temp = "{ALIVE_TEXT}\n\n\
+**{EMOJI} Master : {mention}**\n\
+**{EMOJI} Uptime :** `{uptime}`\n\
+**{EMOJI} Telethon version :** `{televar}`\n\
+**{EMOJI} Catuserbot Version :** `{catver}`\n\
+**{EMOJI} Python Version :** `{pyver}`\n\
+**{EMOJI} Database :** `{dbhealth}`\n"
 
 
 @catub.cat_cmd(

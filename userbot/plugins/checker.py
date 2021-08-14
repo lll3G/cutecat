@@ -34,14 +34,14 @@ async def sed(event):
     if not query:
         return await event.edit("__Please input cc who want to check!..__")
     await event.edit(f"```𝙲𝙷𝙴𝙲𝙺𝙸𝙽𝙶 𝙲𝙲 𝚆𝙰𝙸𝚃...```")
-    async with bot.conversation("@Carol5_bot") as conv:
+    async with bot.conversation("@AuthCheckerBot") as conv:
         try:
             jemboed = await conv.send_message(f"/ss {query}")
             await asyncio.sleep(20)
             asu = await conv.get_response()
             await bot.send_read_acknowledge(conv.chat_id)			
         except YouBlockedUserError:
-            return await event.reply("Unblock @Carol5_bot or chat first")
+            return await event.reply("Unblock @AuthCheckerBot or chat first")
         if asu.text.startswith("Wait for result..."):
             return await event.edit(f"cc {query} Invalid!")
         else:
@@ -100,14 +100,14 @@ async def sed(event):
     if not query:
         return await event.edit("__Please input cc who want to check!..__")
     await event.edit(f"```𝙲𝙷𝙴𝙲𝙺𝙸𝙽𝙶 𝙲𝙲 𝚆𝙰𝙸𝚃...```")
-    async with bot.conversation("@Carol5_bot") as conv:
+    async with bot.conversation("@AuthCheckerBot") as conv:
         try:
-            jemboed = await conv.send_message(f"/ch {query}")
+            jemboed = await conv.send_message(f"/chk {query}")
             await asyncio.sleep(20)
             asu = await conv.get_response()
             await bot.send_read_acknowledge(conv.chat_id)			
         except YouBlockedUserError:
-            return await event.reply("Unblock @Carol5_bot or chat first")
+            return await event.reply("Unblock @AuthCheckerBot or chat first")
         if asu.text.startswith("Wait for result..."):
             return await event.edit(f"cc {query} Invalid!")
         else:

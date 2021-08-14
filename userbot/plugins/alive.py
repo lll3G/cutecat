@@ -44,7 +44,7 @@ async def amireallyalive(event):
     _, check_sgnirts = check_data_base_heal_th()
     EMOJI = gvarstatus("ALIVE_EMOJI") or "🍒"
     ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**✮ BOT IS RUNNING SUCCESSFULLY ✮**"
-    CAT_IMG = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/ea29ff0f15b2b31e4b3d1.jpg"
+    CAT_IMG = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/6f10e4a71a21d297107a8.jpg"
     cat_caption = gvarstatus("ALIVE_TEMPLATE") or temp
     caption = cat_caption.format(
         ALIVE_TEXT=ALIVE_TEXT,

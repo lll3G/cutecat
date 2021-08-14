@@ -37,7 +37,7 @@ async def sed(event):
     async with bot.conversation("@AuthCheckerBot") as conv:
         try:
             jemboed = await conv.send_message(f"/ss {query}")
-            await asyncio.sleep(20)
+            await asyncio.sleep(10)
             asu = await conv.get_response()
             await bot.send_read_acknowledge(conv.chat_id)			
         except YouBlockedUserError:
@@ -103,7 +103,7 @@ async def sed(event):
     async with bot.conversation("@AuthCheckerBot") as conv:
         try:
             jemboed = await conv.send_message(f"/chk {query}")
-            await asyncio.sleep(20)
+            await asyncio.sleep(10)
             asu = await conv.get_response()
             await bot.send_read_acknowledge(conv.chat_id)			
         except YouBlockedUserError:

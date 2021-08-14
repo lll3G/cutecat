@@ -65,7 +65,8 @@ async def startupmessage():
                 BOTLOG_CHATID,
                 "https://telegra.ph/file/ea29ff0f15b2b31e4b3d1.jpg",
                 caption="**Your bot has been started successfully.**",
-                buttons=None
+                buttons=[(Button.url("Dev", "https://t.me/YVW_6"),)],
+            )
     except Exception as e:
         LOGS.error(e)
         return None

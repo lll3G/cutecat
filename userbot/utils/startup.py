@@ -51,7 +51,7 @@ async def setup_bot():
         if Config.OWNER_ID == 0:
             Config.OWNER_ID = utils.get_peer_id(catub.me)
     except Exception as e:
-        LOGS.error(f"STRING_SESSION - {str(e)}")
+        LOGS.error(f"STRING_SESSION - {e}")
         sys.exit()
 
 
@@ -63,10 +63,9 @@ async def startupmessage():
         if BOTLOG:
             Config.CATUBLOGO = await catub.tgbot.send_file(
                 BOTLOG_CHATID,
-                "https://telegra.ph/file/614157ae8df57adcf0057.jpg",
+                "https://telegra.ph/file/ea29ff0f15b2b31e4b3d1.jpg",
                 caption="**Your bot has been started successfully.**",
-                buttons=[(Button.url("DEV", "https://t.me/YVW_6"),)],
-            )
+                buttons=None
     except Exception as e:
         LOGS.error(e)
         return None

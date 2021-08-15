@@ -54,16 +54,16 @@ async def sed(event):
         return
     query = event.pattern_match.group(1)
     if not query:
-        return await event.edit("__Please input cc who want to check!..__")
+        return await event.edit("__Please input bin who want to generate!..__")
     await event.edit(f"`𝙶𝙴𝙽𝙴𝚁𝙰𝚃𝙴 𝙲𝙲 𝚆𝙰𝙸𝚃...`")
-    async with bot.conversation("@xiaolegacy_bot") as conv:
+    async with bot.conversation("@AuthCheckerBot") as conv:
         try:
             jemboed = await conv.send_message(f"/gen {query}")
             await asyncio.sleep(10)
             asu = await conv.get_response()
             await bot.send_read_acknowledge(conv.chat_id)			
         except YouBlockedUserError:
-            return await event.reply("Unblock @xiaolegacy_bot or chat first")
+            return await event.reply("Unblock @AuthCheckerBot or chat first")
         if asu.text.startswith("Wait for result..."):
             return await event.edit(f"bin {query} Invalid!")
         else:

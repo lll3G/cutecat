@@ -40,6 +40,7 @@ async def amireallyalive(event):
 
     _, check_sgnirts = check_data_base_heal_th()
 
+    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**✮ Catuserbot is Up and Running ✮**"
     EMOJI = gvarstatus("ALIVE_EMOJI") or "‣"
 
     CUSTOM_ALIVE_TEXT = gvarstatus("ALIVE_TEXT")

@@ -40,13 +40,11 @@ async def amireallyalive(event):
 
     _, check_sgnirts = check_data_base_heal_th()
 
-    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**✮ Catuserbot is Up and Running ✮**"
-
     EMOJI = gvarstatus("ALIVE_EMOJI") or "‣"
 
-    CUSTOM_ALIVE_TEXT = gvarstatus("ALIVE_TEXT")
+    CUSTOM_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**✮ Catuserbot is Up and Running ✮**"
 
-    CAT_IMG = gvarstatus("ALIVE_PIC")
+    CAT_IMG = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/002afc468d21d3a7a1b99.jpg"
 
     if CAT_IMG:
 
@@ -77,8 +75,6 @@ async def amireallyalive(event):
         cat_caption += f"┏━━━━━✦❘༻༺❘✦━━━━━┓\n┃ ⁭⁫**{EMOJI} 📡 ᴘɪɴɢ :** {ms} ms \n┗━━━━━✦❘༻༺❘✦━━━━━┛\n"
 
         cat_caption += f"↠━━━━ღ◆ღ━━━━↞\n"
-
-        cat_caption += f"**{EMOJI} 💙 ᴄʀᴇᴅɪᴛs ᴛᴏ ᴄʀᴇᴀᴛᴏʀs ᴏғ ᴄᴀᴛʙᴏᴛs & sᴜᴘᴘᴏʀᴛᴇʀs** \n"
 
         await event.client.send_file(
             event.chat_id,

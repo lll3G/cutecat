@@ -42,7 +42,7 @@ async def amireallyalive(event):
 
     EMOJI = gvarstatus("ALIVE_EMOJI") or "‣"
 
-    CUSTOM_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**✮ Catuserbot is Up and Running ✮**"
+    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**✮ Catuserbot is Up and Running ✮**"
 
     CAT_IMG = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/002afc468d21d3a7a1b99.jpg"
 
@@ -58,7 +58,7 @@ async def amireallyalive(event):
 
         ms = (end - start).microseconds / 1000
 
-        cat_caption = f"**{CUSTOM_ALIVE_TEXT}**\n\n"
+        cat_caption = f"**{ALIVE_TEXT}**\n\n"
 
         cat_caption += f"┏━━━━━✦❘༻༺❘✦━━━━━┓\n"
 

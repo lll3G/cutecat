@@ -42,9 +42,9 @@ async def amireallyalive(event):
 
     EMOJI = gvarstatus("ALIVE_EMOJI") or "‣"
 
-    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**✮ Catuserbot is Up and Running ✮**"
+    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤**"
 
-    CAT_IMG = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/002afc468d21d3a7a1b99.jpg"
+    CAT_IMG = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/18d19b917eff0b04138c0.jpg"
 
     if CAT_IMG:
 

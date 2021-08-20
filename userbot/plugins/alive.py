@@ -42,7 +42,7 @@ async def amireallyalive(event):
     reply_to_id = await reply_id(event)
     uptime = await get_readable_time((time.time() - StartTime))
     _, check_sgnirts = check_data_base_heal_th()
-    EMOJI = gvarstatus("ALIVE_EMOJI") or "♡♡"
+    EMOJI = gvarstatus("ALIVE_EMOJI") or "♡"
     ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**✮ 𝕿𝖍𝖊 𝕭𝖔𝖙 𝕴𝖘 𝕽𝖚𝖓𝖓𝖎𝖓𝖌 𝕾𝖚𝖈𝖈𝖊𝖘𝖘𝖋𝖚𝖑𝖑𝖞 ✮**"
     CAT_IMG = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/5531fce5158fda5c87e49.jpg" 
     cat_caption = gvarstatus("ALIVE_TEMPLATE") or temp
@@ -97,7 +97,7 @@ temp = "{ALIVE_TEXT}\n\n\
 async def amireallyalive(event):
     "A kind of showing bot details by your inline bot"
     reply_to_id = await reply_id(event)
-    EMOJI = gvarstatus("ALIVE_EMOJI") or "♡♡"
+    EMOJI = gvarstatus("ALIVE_EMOJI") or "♡"
     ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**Catuserbot is Up and Running**"
     cat_caption = f"{ALIVE_TEXT}\n"
     cat_caption += f"**{EMOJI} Telethon version :** `{version.__version__}\n`"

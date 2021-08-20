@@ -233,7 +233,7 @@ async def autobio_loop():
     AUTOBIOSTART = gvarstatus("autobio") == "true"
     while AUTOBIOSTART:
         DMY = time.strftime("%d/%m/%Y")
-        bio = f"{DMY} ||› {DEFAULTUSERBIO}"
+        bio = f"{DEFAULTUSERBIO} 𓆩{DMY}𓆪"
         LOGS.info(bio)
         try:
             await catub(functions.account.UpdateProfileRequest(about=bio))

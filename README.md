@@ -24,6 +24,11 @@ A simple Telegram userbot based on Telethon .
 
 [![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?template=https%3A%2F%2Fgithub.com%2FJisan09%2Fcatpack)
 
+## Deploy to Railway
+Get the [Necessary Variables](#Necessary-Variables) and then click the button below!  
+
+[![DeployonRailway](https://railway.app/button.svg)](https://railway.app/new/template?template=https://github.com/abasheyari595/evilcat/tree/main&plugins=redis&envs=SESSION,API_ID,API_HASH&optionalEnvs=API_ID,API_HASH&SESSIONDesc=Your+telethon+session+string.&API_IDDesc=api_id,+from+my.telegram.org&API_HASHDesc=api_hash,+from+my.telegram.org)
+
   <details>
     <summary>Steps to deploy on Heroku !! </summary>
 

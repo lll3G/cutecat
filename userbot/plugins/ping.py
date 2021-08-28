@@ -16,7 +16,7 @@ except:
 """
 plugin_category = "extra"
 
-PING_PIC = os.environ.get("PING_PIC")  or ("https://telegra.ph/file/502a2c9751c3c06222c51.jpg")
+PING_PIC = os.environ.get("PING_PIC")  or ("https://telegra.ph/file/403ad5dd2e7707e53c0e8.jpg")
 PING_TEXT = os.environ.get("CUSTOM_PING_TEXT", None) or "ɪ ꜱʟᴀʏ ᴅʀᴀɢᴏɴꜱ ᴀᴛ ɴɪɢʜᴛ ᴡʜɪʟᴇ ʏᴏᴜ ꜱʟᴇᴇᴘ🖤🥀"
 
 

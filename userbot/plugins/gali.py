@@ -237,11 +237,11 @@ async def kakashi(event):
 
 
 @catub.cat_cmd(
-    pattern="kis$",
-    command=("kis", plugin_category),
+    pattern="kiss$",
+    command=("kiss", plugin_category),
     info={
         "header": "shows you fun kissing animation",
-        "usage": "{tr}kis",
+        "usage": "{tr}kiss",
     },
 )
 async def _(event):

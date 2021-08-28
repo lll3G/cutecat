@@ -23,7 +23,7 @@ A simple Telegram userbot based on Telethon .
 ### Self host
 
 ## Deploy
-[![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?template=https://github.com/abasheyari595/catpack)
+[![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https%3A%2F%2Fdashboard.heroku.com%2Fnew%3Ftemplate%3Dhttps%3A%2F%2Fgithub.com%2Fabasheyari595%2Fcatpack)
 
   <details>
     <summary>Steps to deploy on Heroku !! </summary>
@@ -39,7 +39,6 @@ A simple Telegram userbot based on Telethon .
 
 ## Inspiration
    - [X-tra-Telegram](https://github.com/Dark-Princ3/X-tra-Telegram)
-   - [Uniborg](https://github.com/SpEcHiDe/UniBorg) & [Uniborg fork](https://github.com/ravana69/PornHub)
    - [Nana-Remix](https://github.com/pokurt/Nana-Remix)
    - [Userge-X](https://github.com/code-rgb/USERGE-X/)
    

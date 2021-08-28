@@ -4,12 +4,8 @@ from userbot import catub
 
 from ..core.managers import edit_or_reply
 from ..sql_helper import warns_sql as sql
-from ..helpers import get_user_from_event, reply_id
-from . import mention
 
 plugin_category = "admin"
-
-mention = "[{tag}](tg://user?id={user.id})"
 
 @catub.cat_cmd(
     pattern="warn(?:\s|$)([\s\S]*)",
@@ -33,23 +29,22 @@ async def _(event):
     if num_warns >= limit:
         sql.reset_warns(reply_message.sender_id, event.chat_id)
         if soft_warn:
-            logger.info("TODO: kick user")
-            reply ="{} التحذيـرات, {mention} تـم طـرده بنـجاح ✅".format(
+            logger.info("TODO: ban user")
+            reply = "⌔︙{} التحـذيرات, [المستخـدم](tg://user?id={}) \n ⌔︙ تـم طـرده بنـجاح ✅".format(
                 limit, reply_message.sender_id
             )
         else:
             logger.info("TODO: ban user")
-            reply ="{} التحذيـرات, {mention} تـم حظـره بنـجاح ✅".format(
+            reply = "⌔︙ {} التحـذيرات [المستخـدم](tg://user?id={})\n ⌔︙ تـم حظـره بنـجاح ✅!".format(
                 limit, reply_message.sender_id
             )
     else:
-        reply ="{mention} لـديه {}/{} من التحذيـرات".format(
+        reply = "⌔︙ [المـستخدم](tg://user?id={}) لـديه {}/{} من التحذيـرات ".format(
             reply_message.sender_id, num_warns, limit
         )
         if warn_reason:
             reply += "\nسبـب أخـر تحـذير:\n{}".format(html.escape(warn_reason))
     await edit_or_reply(event, reply)
-
 
 @catub.cat_cmd(
     pattern="warns",

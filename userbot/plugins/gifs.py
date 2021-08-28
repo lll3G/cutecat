@@ -56,3 +56,21 @@ async def some(event):
         )
         await _catutils.unsavegif(event, nood)
     await catevent.delete()
+
+@catub.cat_cmd(
+    pattern="kiss$",
+    command=("kiss", plugin_category),
+    info={
+        "header": "shows you fun kissing animation",
+        "usage": "{tr}kiss",
+    },
+)
+async def _(event):
+    "fun animation"
+    catevent = await edit_or_reply(event, "`kiss`")
+    animation_interval = 0.2
+    animation_ttl = range(100)
+    animation_chars = ["🤵       👰", "🤵     👰", "🤵  👰", "🤵💋👰"]
+    for i in animation_ttl:
+        await asyncio.sleep(animation_interval)
+        await catevent.edit(animation_chars[i % 4])

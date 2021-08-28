@@ -29,7 +29,7 @@ async def get_adzan(adzan):
     url = f"https://api.pray.zone/v2/times/today.json?city={LOCATION}&timeformat=2"
     request = requests.get(url)
     if request.status_code == 500:
-        return await adzan.edit(f"لا يمكنني إيجاد المـديـنه `{LOCATION}`")
+        return await adzan.edit(f"لا يمكنني إيجاد المـديـنه {LOCATION}")
 
     parsed = json.loads(request.text)
 
@@ -46,15 +46,16 @@ async def get_adzan(adzan):
     isya = parsed["results"]["datetime"][0]["times"]["Isha"]
 
     result = (
-        f"**جـــدول صــــــلوآت  🌷🌹** :\n"
-        f"📅 `{date} | {timezone}`\n"
-        f"🌏 `{city} | {country}`\n\n"
-        f"**إمـســآك :** `{imsak}`\n"
-        f"**الـفـجـــر :** `{subuh}`\n"
-        f"**الـظــهــر :** `{zuhur}`\n"
-        f"**الـعصـــر :** `{ashar}`\n"
-        f"**الـمـغـرب :** `{maghrib}`\n"
-        f"**الـعشـ ـآء :** `{isya}`\n"
-    )
-cat_caption += f"      ↠━━━━ღ◆ღ━━━━↞\n"
+    f"          ↠━━━━ღ◆ღ━━━━↞\n"
+        f"جـــدول صــــــلوآت  🌷🌹 :\n"
+        f"📅 {date} | {timezone}\n"
+        f"🌏 {city} | {country}\n\n"
+        f"إمـســآك : {imsak}\n"
+        f"الـفـجـــر : {subuh}\n"
+        f"الـظــهــر : {zuhur}\n"
+        f"الـعصـــر : {ashar}\n"
+        f"الـمـغـرب : {maghrib}\n"
+        f"الـعشـ ـآء : {isya}\n"
+    f"          ↠━━━━ღ◆ღ━━━━↞\n"
+)
     await adzan.edit(result)

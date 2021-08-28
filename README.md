@@ -25,8 +25,8 @@ A simple Telegram userbot based on Telethon .
 ## Deploy to Railway
 Get the [Necessary Variables](#Necessary-Variables) and then click the button below!  
 
-[![DeployonRailway](https://railway.app/button.svg)](https://railway.app/new/template?template=https://github.com/Jisan09/catpack&plugins=redis&envs=ALIVE_NAME,APP_ID,API_HASH,STRING_SESSION,TG_BOT_TOKEN,TZ,UPSTREAM_REPO&optionalEnvs=TZ,UPSTREAM_REPO&ALIVE_NAMEDesc=هـنا ضع اسم حسابك الخاص بالتلي.&APP_IDDesc=هـنا ضع ايبي ايدي احصل عليه من  :  my.telegram.org&API_HASHDesc=هـنا ضع ايبي هاش احصل عليه من my.telegram.org)&STRING_SESSIONDesc=هـنا ضع كـود تيرمكس .&TG_BOT_TOKENDesc=هنـا ضع توكن بوتك .&TZDesc=هنـا ضع المنطقه الزمنية الخاص بك  احصل عليه من  http://www.timezoneconverter.com/cgi-bin/findzone.tzc&UPSTREAM_REPODesc=رابط الريبو.
-  <details>
+[![DeployonRailway](https://railway.app/button.svg)](https://railway.app/new/template?template=https://github.com/Jisan09/catpack&plugins=redis&envs=ALIVE_NAME,APP_ID,API_HASH,STRING_SESSION,TG_BOT_TOKEN,TZ,UPSTREAM_REPO&optionalEnvs=TZ,UPSTREAM_REPO&ALIVE_NAMEDesc=هـنا ضع اسم حسابك الخاص بالتلي.&APP_IDDesc=هـنا ضع ايبي ايدي احصل عليه من  :  my.telegram.org&API_HASHDesc=هـنا ضع ايبي هاش احصل عليه من my.telegram.org)&STRING_SESSIONDesc=هـنا ضع كـود تيرمكس .&TG_BOT_TOKENDesc=هنـا ضع توكن بوتك .&TZDesc=هنـا ضع المنطقه الزمنية الخاص بك  احصل عليه من  http://www.timezoneconverter.com/cgi-bin/findzone.tzc&UPSTREAM_REPODesc=رابط الريبو.)
+
     <summary>Steps to deploy on Railway !! </summary>
 
   #### Get Required values First 

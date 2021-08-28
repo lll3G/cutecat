@@ -234,7 +234,7 @@ async def anilist(event):
     command=("manga", plugin_category),
     info={
         "header": "Searches for manga.",
-        "usage": "{tr}manga <manga name",
+        "usage": "{tr}manga <manga name>",
         "examples": "{tr}manga fairy tail",
     },
 )

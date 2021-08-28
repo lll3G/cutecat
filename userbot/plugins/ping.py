@@ -1,13 +1,20 @@
 #======================================================================================================================================
 
-import asyncio
+import asyncio, os
 from datetime import datetime
 
 from ..core.managers import edit_or_reply
 from . import catub, hmention, reply_id
+"""
+try:
+    from . import PING_PIC, PING_TEXT
+except:
+    pass
+"""
+PING_PIC = os.environ.get("PING_PIC")  or ("https://telegra.ph/file/403ad5dd2e7707e53c0e8.jpg")
+PING_TEXT = os.environ.get("CUSTOM_PING_TEXT", None) or "ɪ ꜱʟᴀʏ ᴅʀᴀɢᴏɴꜱ ᴀᴛ ɴɪɢʜᴛ ᴡʜɪʟᴇ ʏᴏᴜ ꜱʟᴇᴇᴘ🖤🥀"
 
 plugin_category = "tools"
-
 
 @catub.cat_cmd(
     pattern="ping( -a|$)",
@@ -33,26 +40,15 @@ async def _(event):
         ms = round((tms - 0.6) / 3, 3)
         await catevent.edit(f"**☞ ╰•★★  ℘ơŋɠ ★★•╯**\n➥ {ms} ms")
     else:
-        catevent = await edit_or_reply(event, "<b><i>☞ `•★★  ℘ơŋɠ ★★•`</b></i>", "html")
+        catevent = await edit_or_reply(event, "<b><i>☞ •★★  ℘ơŋɠ ★★•</b></i>", "html")
         end = datetime.now()
         ms = (end - start).microseconds / 1000
         await catevent.edit(
-            f"╰•★★  ℘ơŋɠ ★★•╯\n\n    ⚘  `{ms}`\n    ⚘  __**Oɯɳҽɾ**__ **:**  {hmention}",
+            f"╰•★★  ℘ơŋɠ ★★•╯\n\n    ⚘ {ms}\n    ⚘ Oɯɳҽɾ : {hmention}",
             parse_mode="html",
-        )
-        
+        )       
 
 #pping -> edited ping with pic
-
-"""
-try:
-    from . import PING_PIC, PING_TEXT
-except:
-    pass
-"""
-PING_PIC = os.environ.get("PING_PIC")  or ("https://telegra.ph/file/403ad5dd2e7707e53c0e8.jpg")
-PING_TEXT = os.environ.get("CUSTOM_PING_TEXT", None) or "ɪ ꜱʟᴀʏ ᴅʀᴀɢᴏɴꜱ ᴀᴛ ɴɪɢʜᴛ ᴡʜɪʟᴇ ʏᴏᴜ ꜱʟᴇᴇᴘ🖤🥀"
-
 
 @catub.cat_cmd(
     pattern="pping$",

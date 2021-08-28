@@ -47,4 +47,4 @@ async def gen(e):
 			msg = f"`Dec by: `@{uname}`\n\n{msg}`"
 			await catevent.respond(msg, link_preview=False)
 			await catevent.delete()
-			await catevent.edit(chat.id)
+			await catevent.edit("response.message.message")

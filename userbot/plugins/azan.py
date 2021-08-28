@@ -46,7 +46,6 @@ async def get_adzan(adzan):
     isya = parsed["results"]["datetime"][0]["times"]["Isha"]
 
     result = (
-    f"          ↠━━━━ღ◆ღ━━━━↞\n"
         f"جـــدول صــــــلوآت  🌷🌹 :\n"
         f"📅 {date} | {timezone}\n"
         f"🌏 {city} | {country}\n\n"

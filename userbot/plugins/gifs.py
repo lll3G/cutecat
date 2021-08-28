@@ -11,7 +11,7 @@ from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.utils import _catutils, reply_id
-from . import catub
+from . import catub, catmemes
 
 plugin_category = "useless"
 

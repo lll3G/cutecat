@@ -1,84 +1,50 @@
+from asyncio import TimeoutError
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
+from telethon.tl.functions.account import UpdateNotifySettingsRequest
+from userbot import catub
 
-@bot.on(admin_cmd(pattern="dec ?(.*)"))
-@bot.on(sudo_cmd(pattern="dec ?(.*)", allow_sudo=True))
-async def _(event):
-    if event.fwd_from:
-        return
-    if not event.reply_to_msg_id:
-        await edit_or_reply(event, "Reply to any user message.")
-        return
-    reply_message = await event.get_reply_message()
-    if not reply_message.media:
-        await edit_or_reply(event, "reply to a media message")
-        return
-    chat = "@hcdecryptor_bot"
-    if reply_message.sender.bot:
-        await edit_or_reply(event, "Reply to actual users message.")
-        return
-    catevent = await edit_or_reply(event, "`Executing...`")
-    async with event.client.conversation(chat) as conv:
-        try:
-            response = conv.wait_event(
-                events.NewMessage(incoming=True, from_users=1326174178)
-            )
-            await event.client.forward_messages(chat, reply_message)
-            response = await response
-        except YouBlockedUserError:
-            await catevent.edit("Please unblock `@hcdecryptor_bot `and try again")
-            return
-        if response.text.startswith("Forward"):
-            await catevent.edit(
-                "can you kindly disable your forward privacy settings for good?"
-            )
-        else:
-            if response.text.startswith("Tidak"):
-                await catevent.edit(
-                    "Decrypt Failed."
-                )
-            else:
-                await catevent.edit(
-                    f"**This is the result**\n {response.message.message}"
-                )
+plugin_category = "extra"
 
-@bot.on(admin_cmd(pattern="evozi ?(.*)"))
-@bot.on(sudo_cmd(pattern="evozi ?(.*)", allow_sudo=True))
-async def _(event):
-    if event.fwd_from:
-        return
-    if not event.reply_to_msg_id:
-        await edit_or_reply(event, "Reply to any user message.")
-        return
-    reply_message = await event.get_reply_message()
-    if not reply_message.media:
-        await edit_or_reply(event, "reply to a media message")
-        return
-    chat = "@decrypt_evozi_bot"
-    if reply_message.sender.bot:
-        await edit_or_reply(event, "Reply to actual users message.")
-        return
-    catevent = await edit_or_reply(event, "`Executing...`")
-    async with event.client.conversation(chat) as conv:
-        try:
-            response = conv.wait_event(
-                events.NewMessage(incoming=True, from_users=1795403022)
-            )
-            await event.client.forward_messages(chat, reply_message)
-            response = await response
-        except YouBlockedUserError:
-            await catevent.edit("Please unblock `@decrypt_evozi_bot `and try again")
-            return
-        if response.text.startswith("Forward"):
-            await catevent.edit(
-                "can you kindly disable your forward privacy settings for good?"
-            )
-        else:
-            if response.text.startswith("Tidak"):
-                await catevent.edit(
-                    "Decrypt Failed."
-                )
-            else:
-                await catevent.edit(
-                    f"**This is the result**\n {response.message.message}"
-                )
+@catub.cat_cmd(
+    pattern="sniff$",
+    command=("sniff", plugin_category),
+    info={
+        "header": "Decrypt configs",
+        "usage": "{tr}sniff",
+    },
+)
+async def gen(e):
+	if e.fwd_from:
+		return 
+	chat = "@kntlmanis_bot"
+	user = await bot.get_me()
+	if not user.username:
+		uname = user.first_name
+	uname = user.username
+	reply = await e.get_reply_message()
+	if not (reply and reply.media):
+		await edit_or_reply(e, "Reply to a File’")
+		return
+	catevent = await edit_or_reply(e, "`Executing...`")
+	ERROR_ = "Unblok bot @kntlmanis_bot To use this Command"
+	chat = await e.client.get_entity(chat)
+	async with e.client.conversation(chat.username, timeout=15) as conv:
+		try: 
+			response = conv.wait_event(events.NewMessage(incoming=True, from_users=chat.id))
+			await reply.forward_to(chat.username)
+			response = await response
+		except YouBlockedUserError:
+			await catevent.edit(f"`{ERROR_}`")
+			return
+		except asyncio.TimeoutError:
+			return await catevent.edit("`Bot didn't respond in time`")
+		except Exception as ex:
+			return await catevent.edit(f"Error: `{ex}`")
+		msg = response.message.message
+		if "Don't Forget To Join Us" in msg:
+			msg = msg.replace("Don't Forget To Join Us","").replace("😎 GROUP: @SNIFF_DSO","").replace("💻 SOURCE : @hctools","")
+			msg = f"`Dec by: `@{uname}`\n\n{msg}`"
+			await catevent.respond(msg, link_preview=False)
+			await catevent.delete()
+			await catevent.edit(chat.id)

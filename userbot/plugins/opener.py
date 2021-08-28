@@ -3,11 +3,20 @@
 import asyncio
 import os
 import time
+from userbot import catub
 
-opn = []
+plugin_category = "extra"
 
-@bot.on(admin_cmd(pattern="open"))
-@bot.on(sudo_cmd(pattern="open", allow_sudo=True))
+@catub.cat_cmd(
+    pattern="open",
+    command=("open", plugin_category),
+    info={
+        "header": "open file.",
+        "usage": "{tr}open <reply>",
+    },
+)
+async def _(event):
+    "open file"
 async def _(event):
     xx = await edit_or_reply(event, "`Loading ...`")
     if not event.reply_to_msg_id:
@@ -31,13 +40,3 @@ async def _(event):
     opn.clear()
     os.remove(b)
     await xx.delete()
-
-CMD_HELP.update(
-    {
-        "opener": "__**PLUGIN NAME :** Opener__\
-    \n\n📌** CMD ➥** `.open`\
-    \n**USAGE   ➥  **Read contents of file and send as a telegram message\
-    \n\nCoded By @YVW_6\
-     "
-    }
-)

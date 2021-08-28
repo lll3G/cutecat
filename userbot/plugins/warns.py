@@ -4,9 +4,12 @@ from userbot import catub
 
 from ..core.managers import edit_or_reply
 from ..sql_helper import warns_sql as sql
+from ..helpers import get_user_from_event, reply_id
+from . import mention
 
 plugin_category = "admin"
 
+mention = [{tag}](tg://user?id={user.id})
 
 @catub.cat_cmd(
     pattern="warn(?:\s|$)([\s\S]*)",
@@ -31,16 +34,16 @@ async def _(event):
         sql.reset_warns(reply_message.sender_id, event.chat_id)
         if soft_warn:
             logger.info("TODO: kick user")
-            reply = "{} التحذيـرات, [{chat.first_name}](tg://user?id={chat.id}) تـم طـرده بنـجاح ✅".format(
+            reply ="{} التحذيـرات, {mention} تـم طـرده بنـجاح ✅".format(
                 limit, reply_message.sender_id
             )
         else:
             logger.info("TODO: ban user")
-            reply = "{} التحذيـرات, [{chat.first_name}](tg://user?id={chat.id}) تـم حظـره بنـجاح ✅".format(
+            reply ="{} التحذيـرات, {mention} تـم حظـره بنـجاح ✅".format(
                 limit, reply_message.sender_id
             )
     else:
-        reply = "[{chat.first_name}](tg://user?id={chat.id}) لـديه {}/{} من التحذيـرات".format(
+        reply ="{mention} لـديه {}/{} من التحذيـرات".format(
             reply_message.sender_id, num_warns, limit
         )
         if warn_reason:
@@ -95,4 +98,4 @@ async def _(event):
     "لإعادة تعيين التحذيرات"
     reply_message = await event.get_reply_message()
     sql.reset_warns(reply_message.sender_id, event.chat_id)
-    await edit_or_reply(event, "⌔︙ تـم حـذف الـتحذيرات بـنجـاح"")
+    await edit_or_reply(event, "⌔︙ تـم حـذف الـتحذيرات بـنجـاح")

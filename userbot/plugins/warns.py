@@ -35,7 +35,7 @@ async def _(event):
             )
         else:
             logger.info("TODO: ban user")
-            reply = "⌔︙ {} التحـذيرات [المستخـدم](tg://user?id={})\n ⌔︙ تـم حظـره بنـجاح ✅!".format(
+            reply = "⌔︙ {} التحـذيرات, [المستخـدم](tg://user?id={})\n ⌔︙ تـم حظـره بنـجاح ✅".format(
                 limit, reply_message.sender_id
             )
     else:

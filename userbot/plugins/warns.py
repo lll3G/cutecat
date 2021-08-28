@@ -12,16 +12,16 @@ plugin_category = "admin"
     pattern="warn(?:\s|$)([\s\S]*)",
     command=("warn", plugin_category),
     info={
-        "header": "To warn a user.",
-        "description": "will warn the replied user.",
+        "header": "لتحذير المستخدم.",
+        "description": "لتحذير المستخدم بالرد.",
         "usage": "{tr}warn <reason>",
     },
 )
 async def _(event):
-    "To warn a user"
+    "لتحذير المستخدم"
     warn_reason = event.pattern_match.group(1)
     if not warn_reason:
-        warn_reason = "No reason"
+        warn_reason = "بـدون سبـب"
     reply_message = await event.get_reply_message()
     limit, soft_warn = sql.get_warn_setting(event.chat_id)
     num_warns, reasons = sql.warn_user(
@@ -31,20 +31,20 @@ async def _(event):
         sql.reset_warns(reply_message.sender_id, event.chat_id)
         if soft_warn:
             logger.info("TODO: kick user")
-            reply = "{} warnings, [user](tg://user?id={}) has to bee kicked!".format(
+            reply = "{} التحذيـرات, [{chat.first_name}](tg://user?id={chat.id}) تـم طـرده بنـجاح ✅".format(
                 limit, reply_message.sender_id
             )
         else:
             logger.info("TODO: ban user")
-            reply = "{} warnings, [user](tg://user?id={}) has to bee banned!".format(
+            reply = "{} التحذيـرات, [{chat.first_name}](tg://user?id={chat.id}) تـم حظـره بنـجاح ✅".format(
                 limit, reply_message.sender_id
             )
     else:
-        reply = "[user](tg://user?id={}) has {}/{} warnings... watch out!".format(
+        reply = "[{chat.first_name}](tg://user?id={chat.id}) لـديه {}/{} من التحذيـرات".format(
             reply_message.sender_id, num_warns, limit
         )
         if warn_reason:
-            reply += "\nReason for last warn:\n{}".format(html.escape(warn_reason))
+            reply += "\nسبـب أخـر تحـذير:\n{}".format(html.escape(warn_reason))
     await edit_or_reply(event, reply)
 
 
@@ -52,29 +52,27 @@ async def _(event):
     pattern="warns",
     command=("warns", plugin_category),
     info={
-        "header": "To get users warns list.",
+        "header": "للحصول على قائمة المستخدمين المحذرين.",
         "usage": "{tr}warns <reply>",
     },
 )
 async def _(event):
-    "To get users warns list"
+    "للحصول على قائمة المستخدمين المحذرين"
     reply_message = await event.get_reply_message()
-    if not reply_message:
-        return await edit_delete(event, "__Reply to user to get his warns.__")
     result = sql.get_warns(reply_message.sender_id, event.chat_id)
     if not result or result[0] == 0:
-        return await edit_or_reply(event, "this user hasn't got any warnings!")
+        return await edit_or_reply(event, "⌔︙ هذا الشخص ليس لديه اي تحذيرات")
     num_warns, reasons = result
     limit, soft_warn = sql.get_warn_setting(event.chat_id)
     if not reasons:
         return await edit_or_reply(
             event,
-            "this user has {} / {} warning, but no reasons for any of them.".format(
+            "⌔︙ هـذا الـمستخدم {} / {} من الـتحذيرات و بـدون اي سبب ".format(
                 num_warns, limit
             ),
         )
 
-    text = "This user has {}/{} warnings, for the following reasons:".format(
+    text = "⌔︙ هـذا الـمستخدم {}/{} من الـتحذيرات, للأسـباب التاليـة:".format(
         num_warns, limit
     )
     text += "\r\n"
@@ -86,7 +84,7 @@ async def _(event):
     pattern="r(eset)?warns$",
     command=("resetwarns", plugin_category),
     info={
-        "header": "To reset warns of the replied user",
+        "header": "لإعادة تعيين التحذيرات للمستخدم",
         "usage": [
             "{tr}rwarns",
             "{tr}resetwarns",
@@ -94,7 +92,7 @@ async def _(event):
     },
 )
 async def _(event):
-    "To reset warns"
+    "لإعادة تعيين التحذيرات"
     reply_message = await event.get_reply_message()
     sql.reset_warns(reply_message.sender_id, event.chat_id)
-    await edit_or_reply(event, "__Warnings have been reset!__")
+    await edit_or_reply(event, "⌔︙ تـم حـذف الـتحذيرات بـنجـاح"")

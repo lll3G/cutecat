@@ -90,17 +90,17 @@ async def bot_start(event):
         customstrmsg = gvarstatus("START_TEXT") or None
         if customstrmsg is not None:
             start_msg = customstrmsg.format(
-                mention=await client.get_entity('mention'),
-                first=await client.get_entity('first'),
-                last=await client.get_entity('last'),
-                fullname=await client.get_entity('fullname'),
-                username=await client.get_entity('username'),
-                userid=await client.get_entity('userid'),
-                my_first=await client.get_entity('my_first'),
-                my_last=await client.get_entity('my_last'),
-                my_fullname=await client.get_entity('my_fullname'),
-                my_username=await client.get_entity('my_username'),
-                my_mention=await client.get_entity('my_mention'),
+                mention=await event.client.get_entity('mention'),
+                first=await event.client.get_entity('first'),
+                last=await event.client.get_entity('last'),
+                fullname=await event.client.get_entity('fullname'),
+                username=await event.client.get_entity('username'),
+                userid=await event.client.get_entity('userid'),
+                my_first=await event.client.get_entity('my_first'),
+                my_last=await event.client.get_entity('my_last'),
+                my_fullname=await event.client.get_entity('my_fullname'),
+                my_username=await event.client.get_entity('my_username'),
+                my_mention=await event.client.get_entity('my_mention'),
             )
         else:
             start_msg = f"👤 مرحبا 𖤱 {mention} 𖦴 ,\

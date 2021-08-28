@@ -9,7 +9,7 @@ from . import mention
 
 plugin_category = "admin"
 
-mention = [{tag}](tg://user?id={user.id})
+mention = "[{tag}](tg://user?id={user.id})"
 
 @catub.cat_cmd(
     pattern="warn(?:\s|$)([\s\S]*)",

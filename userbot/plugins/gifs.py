@@ -2,7 +2,7 @@
 
 import base64
 import random
-
+import asyncio
 import requests
 from telethon import functions, types
 from telethon.errors.rpcerrorlist import UserNotParticipantError

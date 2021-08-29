@@ -95,12 +95,12 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="قائمه المنع$",
-    command=("قائمه المنع", plugin_category),
+    pattern="قائمة المنع$",
+    command=("قائمة المنع", plugin_category),
     info={
         "header": "لإظهار كلمات القائمة السوداء",
         "description": "يوضح لك قائمة كلمات القائمة السوداء في تلك الدردشة المحددة",
-        "usage": "{tr}قائمه المنع",
+        "usage": "{tr}قائمة المنع",
     },
     groups_only=True,
     require_admin=True,

@@ -13,6 +13,12 @@ plugin_category = "utils"
 @catub.cat_cmd(
     pattern="توجيه ?(.*)$",
     command=("توجيه", plugin_category),
+    info={
+        "⌔︙ الأسـتخدام": "توجيه الرساله لكل المجموعات",
+        "⌔︙ الأمـر": [
+            "{tr}توجيه <النص>",
+        ],
+    },
 )
 async def gcast(event):
     "توجيه الرساله لكل المجموعات."
@@ -40,6 +46,12 @@ async def gcast(event):
 @catub.cat_cmd(
     pattern="تحويل ?(.*)$",
     command=("تحويل", plugin_category),
+    info={
+        "⌔︙ الأسـتخدام": "تحويل الرساله لكل الي في الخاص",
+        "⌔︙ الأمـر": [
+            "{tr}تحويل <النص>",
+        ],
+    },
 )
 async def gucast(event):
     "تحويل الرساله لكل الي في الخاص."

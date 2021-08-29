@@ -15,6 +15,7 @@ plugin_category = "utils"
     command=("توجيه", plugin_category),
 )
 async def gcast(event):
+    "توجيه الرساله لكل المجموعات."
     if not event.out and not is_fullsudo(event.sender_id):
         return await edit_or_reply(event, "هـذا الامـر مقـيد للسـودو")
     xx = event.pattern_match.group(1)
@@ -41,6 +42,7 @@ async def gcast(event):
     command=("تحويل", plugin_category),
 )
 async def gucast(event):
+    "تحويل الرساله لكل الي في الخاص."
     if not event.out and not is_fullsudo(event.sender_id):
         return await edit_or_reply(event, "هـذا الامـر مقـيد للسـودو")
     xx = event.pattern_match.group(1)

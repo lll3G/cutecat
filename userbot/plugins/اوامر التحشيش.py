@@ -55,7 +55,7 @@ async def kakashi(mf):
     command=("رفع مرتي", plugin_category),
 )
 async def permalink(mention):
-    """Generates a link to the user's PM with a custom text."""
+    """اوامر التحشيش ."""
     user, custom = await get_user_from_event(mention)
     if not user:
         return
@@ -73,7 +73,7 @@ async def permalink(mention):
     command=("رفع جلب", plugin_category),
 )
 async def permalink(mention):
-    """Generates a link to the user's PM with a custom text."""
+    """اوامر التحشيش ."""
     user, custom = await get_user_from_event(mention)
     if not user:
         return
@@ -91,7 +91,7 @@ async def permalink(mention):
     command=("رفع تاج", plugin_category),
 )
 async def permalink(mention):
-    """Generates a link to the user's PM with a custom text."""
+    """اوامر التحشيش ."""
     user, custom = await get_user_from_event(mention)
     if not user:
         return
@@ -105,7 +105,7 @@ async def permalink(mention):
     command=("رفع قرد", plugin_category),
 )
 async def permalink(mention):
-    """Generates a link to the user's PM with a custom text."""
+    """اوامر التحشيش ."""
     user, custom = await get_user_from_event(mention)
     if not user:
         return
@@ -123,7 +123,7 @@ async def permalink(mention):
     command=("رفع بكلبي", plugin_category),
 )
 async def permalink(mention):
-    """Generates a link to the user's PM with a custom text."""
+    """اوامر التحشيش ."""
     user, custom = await get_user_from_event(mention)
     if not user:
         return
@@ -138,7 +138,7 @@ async def permalink(mention):
     command=("رفع مطي", plugin_category),
 )
 async def permalink(mention):
-    """Generates a link to the user's PM with a custom text."""
+    """اوامر التحشيش ."""
     user, custom = await get_user_from_event(mention)
     if not user:
         return
@@ -156,7 +156,7 @@ async def permalink(mention):
     command=("رفع زوجي", plugin_category),
 )
 async def permalink(mention):
-    """Generates a link to the user's PM with a custom text."""
+    """اوامر التحشيش ."""
     user, custom = await get_user_from_event(mention)
     if not user:
         return

@@ -168,7 +168,7 @@ async def _(event):
     await autobio_loop()
 
 
-@catub.cat_cmd=(
+@catub.cat_cmd(
     pattern="انهاء ([\s\S]*)",
     command=("انهاء", plugin_category),)
 async def _(event):  # sourcery no-metrics

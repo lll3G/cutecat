@@ -67,11 +67,11 @@ async def digitalpicloop():
         current_time = datetime.now().strftime("%I:%M")
         img = Image.open(autophoto_path)
         drawn_text = ImageDraw.Draw(img)
-        roz = str(base64.b64decode("dXNlcmJvdC9oZWxwZXJzL3N0eWxlcy9QYXliQWNrLnR0Zg=="))[
+        cat = str(base64.b64decode("dXNlcmJvdC9oZWxwZXJzL3N0eWxlcy9kaWdpdGFsLnR0Zg=="))[
             2:36
         ]
-        fnt = ImageFont.truetype(roz, 65)
-        drawn_text.text((300, 400), current_time, font=fnt, fill=(280, 280, 280))
+        fnt = ImageFont.truetype(cat, 200)
+        drawn_text.text((350, 100), current_time, font=fnt, fill=(124, 252, 0))
         img.save(autophoto_path)
         file = await catub.upload_file(autophoto_path)
         try:
@@ -122,7 +122,15 @@ async def autobio_loop():
 
 @catub.cat_cmd(
     pattern="صوره وقتيه$",
-    command=("صوره وقتيه", plugin_category),)
+    command=("صوره وقتيه", plugin_category),
+    info={
+        "header": "Updates your profile pic every 1 minute with time on it",
+        "description": "Deletes old profile pic and Update profile pic with new image with time on it.\
+             You can change this image by setting DIGITAL_PIC var in heroku with telegraph image link",
+        "note": "To stop this do '.انهاء صوره وقتيه'",
+        "usage": "{tr}صوره وقتيه",
+    },
+)
 async def _(event):
     "تغيير الصوره مع الوقت"
     downloader = SmartDL(digitalpfp, digitalpic_path, progress_bar=False)
@@ -140,7 +148,7 @@ async def _(event):
     pattern="اسم وقتي$",
     command=("اسم وقتي", plugin_category),)
 async def _(event):
-    "To set your display name along with time"
+    "تغيير الاسم مع الوقت"
     if gvarstatus("autoname") is not None and gvarstatus("autoname") == "true":
         return await edit_delete(event, "**الاسـم الـوقتي شغـال بالأصـل 🧸♥**")
     addgvar("autoname", True)
@@ -152,21 +160,21 @@ async def _(event):
     pattern="بايو تلقائي$",
     command=("بايو تلقائي", plugin_category),)
 async def _(event):
-    "To update your bio along with time"
+    "لتحديث البايو مع التاريخ"
     if gvarstatus("autobio") is not None and gvarstatus("autobio") == "true":
-        return await edit_delete(event, "**الـبايو الـوقتي شغـال بالأصـل 🧸♥**")
+        return await edit_delete(event, "**الـبايو التلقائي شغـال بالأصـل 🧸♥**")
     addgvar("autobio", True)
-    await edit_delete(event, "**تم تفـعيل البـايو الـوقتي بنجـاح ✅**")
+    await edit_delete(event, "**تم تفـعيل البـايو التلقائي بنجـاح ✅**")
     await autobio_loop()
 
 
-@catub.cat_cmd(
+@catub.cat_cmd=(
     pattern="انهاء ([\s\S]*)",
     command=("انهاء", plugin_category),)
 async def _(event):  # sourcery no-metrics
-    "To stop the functions of autoprofile plugin"
+    "لايقاف تفعيل اوامر البروفايل التلقائي"
     input_str = event.pattern_match.group(1)
-    if input_str == "الصورة الوقتية":
+    if input_str == "صوره وقتيه":
         if gvarstatus("digitalpic") is not None and gvarstatus("digitalpic") == "true":
             delgvar("digitalpic")
             await event.client(
@@ -174,8 +182,8 @@ async def _(event):  # sourcery no-metrics
                     await event.client.get_profile_photos("me", limit=1)
                 )
             )
-            return await edit_delete(event, "**تم ايقاف الصورة الوقتية بنـجاح ✅**")
-        return await edit_delete(event, "**لم يتم تفعيل الصورة الوقتية بالأصل 🧸♥**")
+            return await edit_delete(event, "**تم ايقاف الصوره الوقتيه بنـجاح ✅**")
+        return await edit_delete(event, "**لم يتم تفعيل الصوره الوقتيه بالأصل 🧸♥**")
     if input_str == "اسم وقتي":
         if gvarstatus("autoname") is not None and gvarstatus("autoname") == "true":
             delgvar("autoname")

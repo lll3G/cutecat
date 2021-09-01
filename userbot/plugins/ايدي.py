@@ -1,4 +1,5 @@
-# edit by @YVW_6
+# Copyright (C) 2021 VENOM TEAM
+# FILES WRITTEN BY @YS9II
 
 import html
 import os
@@ -7,7 +8,6 @@ from requests import get
 from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.utils import get_input_location
-
 from userbot import catub
 from userbot.core.logger import logging
 

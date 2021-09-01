@@ -94,7 +94,7 @@ async def autoname_loop():
     AUTONAMESTART = gvarstatus("autoname") == "true"
     while AUTONAMESTART:
         HM = time.strftime("%I:%M")
-        name = f"🍀 {DEFAULTUSER}↺{HM}"
+        name = f"𓆩 {HM} ◷ {DEFAULTUSER} 𓆪"
         LOGS.info(name)
         try:
             await catub(functions.account.UpdateProfileRequest(first_name=name))
@@ -124,10 +124,10 @@ async def autobio_loop():
     pattern="صوره وقتيه$",
     command=("صوره وقتيه", plugin_category),
     info={
-        "header": "Updates your profile pic every 1 minute with time on it",
-        "description": "Deletes old profile pic and Update profile pic with new image with time on it.\
-             You can change this image by setting DIGITAL_PIC var in heroku with telegraph image link",
-        "note": "To stop this do '.انهاء صوره وقتيه'",
+        "header": "تغيير الصوره مع الوقت كل دقيقة",
+        "description": "مسح الصوره القديمه وتحديث الصوره مع الوقت.\
+             تستطيع تغيير الصوره عن طريق ضبط الڤار DIGITAL_PIC في هيروكو مع رابط تلكراف للصوره",
+        "note": "للايقاف '.انهاء صوره وقتيه'",
         "usage": "{tr}صوره وقتيه",
     },
 )

@@ -1,4 +1,5 @@
-# FILES WRITTEN BY @YVW_6
+# Copyright (C) 2021 VENOM TEAM
+# FILES WRITTEN BY @YS9II
 
 from covid import Covid
 

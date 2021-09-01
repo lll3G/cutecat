@@ -1,3 +1,6 @@
+# Copyright (C) 2021 VENOM TEAM
+# FILES WRITTEN BY @YS9II
+
 import os
 
 from telethon import events

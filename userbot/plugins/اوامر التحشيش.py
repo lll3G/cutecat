@@ -1,3 +1,6 @@
+# Copyright (C) 2021 VENOM TEAM
+# FILES WRITTEN BY @YS9II
+
 import html
 import os
 
@@ -48,6 +51,7 @@ C = (
     command=("خد", plugin_category),
 )
 async def kakashi(mf):
+    """اوامر التحشيش ."""
     await edit_or_reply(mf, C)
 
 @catub.cat_cmd(

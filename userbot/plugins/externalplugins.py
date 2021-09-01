@@ -1,3 +1,6 @@
+# Copyright (C) 2021 VENOM TEAM
+# FILES WRITTEN BY @YS9II
+
 import os
 from pathlib import Path
 
@@ -42,7 +45,7 @@ if Config.PLUGIN_CHANNEL:
             if BOTLOG:
                 await catub.send_message(
                     BOTLOG_CHATID,
-                    f"Installed Plugin `{os.path.basename(downloaded_file_name)}` successfully.",
+                    f"⌔︙ تـم تـنصـيب المـلف `{os.path.basename(downloaded_file_name)}` بنجاح ✅.",
                 )
 
     catub.loop.create_task(install())

@@ -63,10 +63,10 @@ async def ban_user_from_bot(user, reason, reply_to=None):
     except Exception as e:
         LOGS.error(str(e))
     banned_msg = (
-        f"**You have been Banned Forever from using this bot.\nReason** : {reason}"
+        f"**لقد تم حظرك إلى الأبد من استخدام هذا البوت 🚫.\nالسبب** : {reason}"
     )
     await catub.tgbot.send_message(user.id, banned_msg)
-    info = f"**#Banned_Bot_PM_User**\
+    info = f"**#تم_حظر_مستخدم_من_البوت**\
             \n\n👤 {_format.mentionuser(get_display_name(user) , user.id)}\
             \n**First Name:** {user.first_name}\
             \n**User ID:** `{user.id}`\
@@ -81,12 +81,11 @@ async def unban_user_from_bot(user, reason, reply_to=None):
         rem_user_from_bl(user.id)
     except Exception as e:
         LOGS.error(str(e))
-    banned_msg = "**You have been Unbanned from this bot. From now on you can send messages here to contact my master.**"
-
+    banned_msg = f"**⚜️ تم الغاء حظرك من البوت بنجاح ✅.\nمن الآن يمكنك التواصل معي.**"
     if reason is not None:
-        banned_msg += f"\n**Reason:** __{reason}__"
+        banned_msg += f"\n**السبب:** __{reason}__"
     await catub.tgbot.send_message(user.id, banned_msg)
-    info = f"**#Unbanned_Bot_PM_User**\
+    info = f"**#تم_الغاء_حظر_مستخدم_من_البوت**\
             \n\n👤 {_format.mentionuser(get_display_name(user) , user.id)}\
             \n**First Name:** {user.first_name}\
             \n**User ID:** `{user.id}`"

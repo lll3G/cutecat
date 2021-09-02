@@ -282,7 +282,7 @@ async def upstream(event):
 )
 async def upstream(event):
     event = await edit_or_reply(event, "`Pulling the catpack repo wait a sec ....`")
-    off_repo = "https://github.com/venom-ar/catpack"
+    off_repo = "https://github.com/Mr-confused/nekopack"
     os.chdir("/app")
     try:
         txt = "`عفوا .. لا يمكن أن يستمر التحديث بسبب "

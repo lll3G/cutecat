@@ -94,7 +94,7 @@ async def autoname_loop():
     AUTONAMESTART = gvarstatus("autoname") == "true"
     while AUTONAMESTART:
         HM = time.strftime("%I:%M")
-        name = f"𓆩 {EMOJI_TELETHON} {HM} ⏱ {DEFAULTUSER} 𓆪"
+        name = f"{EMOJI_TELETHON} {HM} || 𓆩 {DEFAULTUSER} 𓆪"
         LOGS.info(name)
         try:
             await catub(functions.account.UpdateProfileRequest(first_name=name))

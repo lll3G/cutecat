@@ -23,7 +23,7 @@ A simple Telegram userbot based on Telethon .
 ### Self host
 
 ## Deploy
-[![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?template=https%3A%2F%2Fgithub.com%2Fabasheyari595%2Fcatpack)
+[![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https%3A%2F%2Fdashboard.heroku.com%2Fnew%3Ftemplate%3Dhttps%3A%2F%2Fgithub.com%2Fvenom-ar%2Fcatpack)
 
   <details>
     <summary>Steps to deploy on Heroku !! </summary>

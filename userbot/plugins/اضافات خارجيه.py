@@ -88,7 +88,7 @@ async def send(event):
         ms = (end - start).seconds
         await event.delete()
         await caat.edit(
-            f"<b><i>🔗 اسم الاضافه :- {input_str} .</i></b>\n<b><i>🧪 تم التحميل في {ms} ثواني.</i></b>\n<b><i>",
+            f"<b><i>🔗 اسم الاضافه :- {input_str} .</i></b>\n<b><i>🧪 تم التحميل في {ms} ثواني .</i></b>\n<b><i>",
             parse_mode="html",
         )
     else:

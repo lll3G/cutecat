@@ -81,7 +81,7 @@ async def startupmessage():
         if msg_details:
             await catub.check_testcases()
             message = await catub.get_messages(msg_details[0], ids=msg_details[1])
-            text = message.text + "\n\n**⌔︙ اهلا وسهلا لقد قمت باعاده التشغيل بـوت ڤينوم يعمل بنجاح ✅**"
+            text = message.text + "\n\n**⌔︙ اهلا وسهلا لقد قمت باعاده التشغيل بـوت كات يعمل بنجاح ✅**"
             await catub.edit_message(msg_details[0], msg_details[1], text)
             if gvarstatus("restartupdate") is not None:
                 await catub.send_message(

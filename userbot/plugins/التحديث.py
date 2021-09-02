@@ -110,7 +110,7 @@ async def update(event, repo, ups_rem, ac_br):
         repo.git.reset("--hard", "FETCH_HEAD")
     await update_requirements()
     sandy = await event.edit(
-        "**⌔︙تـم تحـديث تـليثون كات بنجـاح ✅㊙️**\n" "**⌔︙ جاري اعادة تشغيل البوت ⏱**"
+        "**⌔︙تـم تحـديث تـليثون كات بالعربي بنجـاح ✅㊙️**\n" "**⌔︙ جاري اعادة تشغيل البوت ⏱**"
     )
     await event.client.reload(sandy)
 
@@ -185,7 +185,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
         pass
 
 
-@venom.ar_cmd(
+@catub.cat_cmd(
     pattern="تحديث(| الان)?$",
     command=("تحديث", plugin_category),
     info={
@@ -205,7 +205,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
 async def upstream(event):
     "للتحقق مما إذا كان الروبوت محدثا وتحديثه إذا كان محدد"
     conf = event.pattern_match.group(1).strip()
-    event = await edit_or_reply(event, "**⌔︙ يـتـم البـحـث عـن تـحديثـات سـورس كات انـتـظـر**")
+    event = await edit_or_reply(event, "**⌔︙ يـتـم البـحـث عـن تـحديثـات سـورس كات بالعربي انـتـظـر**")
     off_repo = UPSTREAM_REPO_URL
     force_update = False
     if HEROKU_API_KEY is None or HEROKU_APP_NAME is None:
@@ -257,7 +257,7 @@ async def upstream(event):
     # Special case for deploy
     if changelog == "" and not force_update:
         await event.edit(
-            "**⌔︙ تيلثون كات محدث الى اخر اصدار **\n"
+            "**⌔︙ تيلثون كات بالعربي محدث الى اخر اصدار **\n"
             f"**سـورس كات بالعربي** : @YS9II"
         )
         return repo.__del__()
@@ -265,7 +265,7 @@ async def upstream(event):
         await print_changelogs(event, ac_br, changelog)
         await event.delete()
         return await event.respond(
-            f"⌔ :  لتحديث تيلثون كات ارسل : `.تحديث الان` "
+            f"⌔ :  لتحديث تيلثون كات بالعربي ارسل : `.تحديث الان` "
         )
 
     if force_update:
@@ -273,11 +273,11 @@ async def upstream(event):
             "`قوة المزامنة إلى أحدث اصدار مستقر ، يرجى الانتظار...`"
         )
     if conf == "الان":
-        await event.edit("** ⌔︙ جار تحـديـث تيلثون كات انـتـظـر قـليـلا 🔨**")
+        await event.edit("** ⌔︙ جار تحـديـث تيلثون كات بالعربي انـتـظـر قـليـلا 🔨**")
         await update(event, repo, ups_rem, ac_br)
     return
 
-@venom.ar_cmd(
+@catub.cat_cmd(
     pattern="تحديث التيلثون$",
 )
 async def upstream(event):
@@ -285,8 +285,8 @@ async def upstream(event):
     off_repo = "https://github.com/Jisan09/catpack"
     os.chdir("/app")
     try:
-        txt = "`Oops.. Updater cannot continue due to "
-        txt += "some problems occured`\n\n**LOGTRACE:**\n"
+        txt = "`عفوا .. لا يمكن أن يستمر التحديث بسبب "
+        txt += "حدثت بعض المشاكل`\n\n**LOGTRACE:**\n"
         repo = Repo()
     except NoSuchPathError as error:
         await event.edit(f"{txt}\n`directory {error} is not found`")

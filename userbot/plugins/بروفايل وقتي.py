@@ -52,7 +52,7 @@ autophoto_path = os.path.join(os.getcwd(), "userbot", "photo_pfp.png")
 
 digitalpfp = Config.DIGITAL_PIC or "https://telegra.ph/file/aeaebe33b1f3988a0b690.jpg"
 
-EMOJI_TELETHON = gvarstatus("ALIVE_EMOJI") or "🍃"
+EMOJI_TELETHON = gvarstatus("ALIVE_EMOJI") or "𖠕"
 async def digitalpicloop():
     DIGITALPICSTART = gvarstatus("digitalpic") == "true"
     i = 0
@@ -94,7 +94,7 @@ async def autoname_loop():
     AUTONAMESTART = gvarstatus("autoname") == "true"
     while AUTONAMESTART:
         HM = time.strftime("%I:%M")
-        name = f"{EMOJI_TELETHON} {HM} ⏱ {DEFAULTUSER}"
+        name = f"𓆩 {EMOJI_TELETHON} {HM} ⏱ {DEFAULTUSER} 𓆪"
         LOGS.info(name)
         try:
             await catub(functions.account.UpdateProfileRequest(first_name=name))

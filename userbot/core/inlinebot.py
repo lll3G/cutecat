@@ -56,7 +56,7 @@ def main_menu():
     text = f"تعريب ڤينوم\
         \n مساعده\
         \n\
-        \n 𝗣𝗿𝗼𝘃𝗶𝗱𝗲𝗱 𝗯𝘆 {mention}**"
+        \n 𝗣𝗿𝗼𝘃𝗶𝗱𝗲𝗱 𝗯𝘆 {mention}"
     buttons = [
         (Button.inline("ℹ️ معلومات", data="check"),),
         (
@@ -536,10 +536,10 @@ async def inline_handler(event):  # sourcery no-metrics
     else:
         buttons = [
             (
-                Button.url("Source code", "https://github.com/abasheyari595/cutecat"),
+                Button.url("سورس كود", "https://github.com/abasheyari595/cutecat"),
                 Button.url(
-                    "Deploy",
-                    "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2FMr-confused%2Fcatpack&template=https%3A%2F%2Fgithub.com%2FMr-confused%2Fcatpack",
+                    "التنصيب",
+                    "https://dashboard.heroku.com/new?template=https://github.com/venom-ar/catpack",
                 ),
             )
         ]
@@ -576,11 +576,11 @@ async def on_plug_in_callback_query_handler(event):
 
 @catub.tgbot.on(CallbackQuery(data=re.compile(b"check")))
 async def on_plugin_callback_query_handler(event):
-    text = f"📌 الاضافات: {len(PLG_INFO)}\
-        \n🔪 الاوامر: {len(CMD_INFO)}\
-        \n\n{tr}🔋 مساعده <اسم الاضافه> : للحصول علي معلومات حول الاضافه.\
-        \n{tr}🧩 مساعده الامر <اسم الامر> : لمعلومات عن اي امر.\
-        \n{tr}💉 بحث عن امر <القيمه> : للبحث عن اي امر.\
+    text = f"الاضافات: {len(PLG_INFO)}\
+        \nالاوامر: {len(CMD_INFO)}\
+        \n\n{tr}مساعده <اسم الاضافه> : للحصول علي معلومات حول الاضافه.\
+        \n{tr}مساعده الامر <اسم الامر> : لمعلومات عن اي امر.\
+        \n{tr}بحث عن امر <القيمه> : للبحث عن اي امر.\
         "
     await event.answer(text, cache_time=0, alert=True)
 

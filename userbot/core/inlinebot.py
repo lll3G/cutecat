@@ -578,8 +578,8 @@ async def on_plug_in_callback_query_handler(event):
 async def on_plugin_callback_query_handler(event):
     text = f"الاضافات: {len(PLG_INFO)}\
         \nالاوامر: {len(CMD_INFO)}\
-        \n\n{tr}مساعده <اسم الاضافه> : للحصول علي معلومات حول الاضافه.\
-        \n{tr}مساعده الامر <اسم الامر> : لمعلومات عن اي امر.\
+        \n\n{tr}help <اسم الاضافه> : للحصول علي معلومات حول الاضافه.\
+        \n{tr}help الامر <اسم الامر> : لمعلومات عن اي امر.\
         \n{tr}بحث عن امر <القيمه> : للبحث عن اي امر.\
         "
     await event.answer(text, cache_time=0, alert=True)

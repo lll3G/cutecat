@@ -1,7 +1,5 @@
-""" Download Youtube Video / Audio in a User friendly interface """
-# --------------------------- #
-#   Modded ytdl by code-rgb   #
-# --------------------------- #
+# Copyright (C) 2021 VENOM TEAM
+# FILES WRITTEN BY @YS9II
 
 import asyncio
 import glob
@@ -44,17 +42,17 @@ PATH = "./userbot/cache/ytsearch.json"
 plugin_category = "bot"
 
 
-@catub.ar_cmd(
-    pattern="iytdl(?:\s|$)([\s\S]*)",
-    command=("iytdl", plugin_category),
+@catub.cat_cmd(
+    pattern="يوتيوب(?:\s|$)([\s\S]*)",
+    command=("يوتيوب", plugin_category),
     info={
-        "header": "ytdl with inline buttons.",
-        "description": "To search and download youtube videos by inline buttons.",
-        "usage": "{tr}iytdl [URL / Text] or [Reply to URL / Text]",
+        "header": "تحميل من اليوتيوب",
+        "description": "للبحث وتحميل أشرطة الفيديو من اليوتيوب عن طريق أزرار",
+        "usage": "{tr}يوتيوب [الرابط / النص] or [بالرد علي الرابط / النص]",
     },
 )
 async def iytdl_inline(event):
-    "ytdl with inline buttons."
+    "تحميل من اليوتيوب."
     reply = await event.get_reply_message()
     reply_to_id = await reply_id(event)
     input_str = event.pattern_match.group(1)
@@ -64,15 +62,15 @@ async def iytdl_inline(event):
     elif reply and reply.text:
         input_url = (reply.text).strip()
     if not input_url:
-        return await edit_delete(event, "Give input or reply to a valid youtube URL")
-    catevent = await edit_or_reply(event, f"🔎 Searching Youtube for: `'{input_url}'`")
+        return await edit_delete(event, " ⌔︙ يجـب وضـع اسـم المـوضوع او بالـرد عـلـى الـرابـط")
+    catevent = await edit_or_reply(event, f"🔎 يتـم البـحث في اليـوتيـوب عـن : `'{input_url}'`")
     flag = True
     cout = 0
     results = None
     while flag:
         try:
             results = await event.client.inline_query(
-                Config.TG_BOT_USERNAME, f"ytdl {input_url}"
+                Config.TG_BOT_USERNAME, f"يوتيوب {input_url}"
             )
             flag = False
         except BotResponseTimeoutError:
@@ -84,7 +82,7 @@ async def iytdl_inline(event):
         await catevent.delete()
         await results[0].click(event.chat_id, reply_to=reply_to_id, hide_via=True)
     else:
-        await catevent.edit("`Sorry!. Can't find any results`")
+        await catevent.edit("**⌔︙ عـذرا لـم استـطيع ايـجاد اي نتـيـجة**")
 
 
 @catub.tgbot.on(
@@ -112,19 +110,19 @@ async def ytdl_download_callback(c_q: CallbackQuery):  # sourcery no-metrics
     if str(choice_id).isdigit():
         choice_id = int(choice_id)
         if choice_id == 0:
-            await c_q.answer("🔄  Processing...", alert=False)
+            await c_q.answer(" ⌔︙ يتـم الـمعـالجـة 🔄  ", alert=False)
             await c_q.edit(buttons=(await download_button(yt_code)))
             return
     startTime = time()
     choice_str, disp_str = get_choice_by_id(choice_id, downtype)
-    media_type = "Video" if downtype == "v" else "Audio"
-    callback_continue = f"Downloading {media_type} Please Wait..."
+    media_type = "الفيديـو" if downtype == "v" else "المقـطع صـوتـي"
+    callback_continue = f" ⌔︙ يتـم تـحـميـل  {media_type} الــرجاء الانتـظار"
     callback_continue += f"\n\nFormat Code : {disp_str}"
     await c_q.answer(callback_continue, alert=True)
     upload_msg = await c_q.client.send_message(BOTLOG_CHATID, "Uploading...")
     yt_url = BASE_YT_URL + yt_code
     await c_q.edit(
-        f"<b>⬇️ Downloading {media_type} ....</b>\n\n🔗  <a href={yt_url}> <b>Link</b></a>\n🆔  <b>Format Code</b> : {disp_str}",
+        f"<b>⬇️ يتـم تـحـميـل {media_type} ....</b>\n\n🔗  <a href={yt_url}> <b>الـرابـط</b></a>\n🆔  <b>صـيغة الـتنـزيل</b> : {disp_str}",
         parse_mode="html",
     )
     if downtype == "v":
@@ -141,7 +139,7 @@ async def ytdl_download_callback(c_q: CallbackQuery):  # sourcery no-metrics
         else:
             _fpath = _path
     if not _fpath:
-        await edit_delete(upload_msg, "nothing found !")
+        await edit_delete(upload_msg, "** ⌔︙ لم يتـم الـعثـور عـلى اي شيئ !")
         return
     if not thumb_pic and downtype == "v":
         thumb_pic = str(await pool.run_in_thread(download)(await get_ytthumb(yt_code)))
@@ -171,7 +169,7 @@ async def ytdl_download_callback(c_q: CallbackQuery):  # sourcery no-metrics
     uploaded_media = await c_q.client.send_file(
         BOTLOG_CHATID,
         file=media,
-        caption=f"<b>File Name : </b><code>{os.path.basename(Path(_fpath))}</code>",
+        caption=f"<b>اسم الملف 📮: </b><code>{os.path.basename(Path(_fpath))}</code>",
         parse_mode="html",
     )
     await upload_msg.delete()
@@ -204,7 +202,7 @@ async def ytdl_callback(c_q: CallbackQuery):
     )
     if not os.path.exists(PATH):
         return await c_q.answer(
-            "Search data doesn't exists anymore, please perform search again ...",
+            "بيانات البحث لا توجد بعد الآن، يرجى إجراء البحث مرة أخرى ...",
             alert=True,
         )
     with open(PATH) as f:
@@ -231,7 +229,7 @@ async def ytdl_callback(c_q: CallbackQuery):
     elif choosen_btn == "next":
         index = int(page) + 1
         if index > total:
-            return await c_q.answer("That's All Folks !", alert=True)
+            return await c_q.answer("هـذا كـل شـي !", alert=True)
         await c_q.answer()
         front_vid = search_data.get(str(index))
         await c_q.edit(
@@ -246,7 +244,7 @@ async def ytdl_callback(c_q: CallbackQuery):
             parse_mode="html",
         )
     elif choosen_btn == "listall":
-        await c_q.answer("View Changed to:  📜  List", alert=False)
+        await c_q.answer("المشـاهـدات تغيـرت لـ:  📜  قائمـة", alert=False)
         list_res = "".join(
             search_data.get(vid_s).get("list_view") for vid_s in search_data
         )
@@ -260,13 +258,13 @@ async def ytdl_callback(c_q: CallbackQuery):
             buttons=[
                 (
                     Button.url(
-                        "↗️  Click To Open",
+                        "↗️  اضـغـط للـرؤيـة",
                         url=telegraph,
                     )
                 ),
                 (
                     Button.inline(
-                        "📰  Detailed View",
+                        "📰  عـرض مـفصـل",
                         data=f"ytdl_detail_{data_key}_{page}",
                     )
                 ),
@@ -274,7 +272,7 @@ async def ytdl_callback(c_q: CallbackQuery):
         )
     else:  # Detailed
         index = 1
-        await c_q.answer("View Changed to:  📰  Detailed", alert=False)
+        await c_q.answer("المشـاهـدات تغيـرت لـ:  📰  مفـصل ", alert=False)
         first = search_data.get(str(index))
         await c_q.edit(
             text=first.get("message"),

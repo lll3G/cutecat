@@ -61,11 +61,11 @@ async def startupmessage():
     """
     try:
         if BOTLOG:
-            Config.CATUBLOGO = await catub.tgbot.send_file(
+            Config.catubLOGO = await catub.tgbot.send_file(
                 BOTLOG_CHATID,
-                "https://telegra.ph/file/2b935245cbe9b9affc5bb.jpg",
-                caption="**Your bot has been started successfully.**",
-                buttons=[(Button.url("Dev", "https://t.me/YVW_6"),)],
+                "https://telegra.ph/file/356fb215e09c611534eb5.jpg",
+                caption="**البوت يعمل بنجاح الآن ✅**",
+                buttons=[(Button.url("تعريب وتعديل", "https://t.me/YS9II"),)],
             )
     except Exception as e:
         LOGS.error(e)
@@ -81,7 +81,7 @@ async def startupmessage():
         if msg_details:
             await catub.check_testcases()
             message = await catub.get_messages(msg_details[0], ids=msg_details[1])
-            text = message.text + "\n\n**Ok Bot is Back and Alive.**"
+            text = message.text + "\n\n**⌔︙ اهلا وسهلا لقد قمت باعاده التشغيل بـوت ڤينوم يعمل بنجاح ✅**"
             await catub.edit_message(msg_details[0], msg_details[1], text)
             if gvarstatus("restartupdate") is not None:
                 await catub.send_message(
@@ -172,7 +172,7 @@ async def load_plugins(folder):
                     os.remove(Path(f"userbot/{folder}/{shortname}.py"))
             except Exception as e:
                 os.remove(Path(f"userbot/{folder}/{shortname}.py"))
-                LOGS.info(f"unable to load {shortname} because of error {e}")
+                LOGS.info(f"⌔︙ غير قادر على التحميل {shortname} يوجد هناك خطا بسبب : {e}")
 
 
 async def verifyLoggerGroup():
@@ -186,33 +186,33 @@ async def verifyLoggerGroup():
             if not isinstance(entity, types.User) and not entity.creator:
                 if entity.default_banned_rights.send_messages:
                     LOGS.info(
-                        "Permissions missing to send messages for the specified PRIVATE_GROUP_BOT_API_ID."
+                        "⌔︙ الفار الأذونات مفقودة لإرسال رسائل لـ PRIVATE_GROUP_BOT_API_ID المحدد."
                     )
                 if entity.default_banned_rights.invite_users:
                     LOGS.info(
-                        "Permissions missing to addusers for the specified PRIVATE_GROUP_BOT_API_ID."
+                        "⌔︙ الفار الأذونات مفقودة لإرسال رسائل لـ PRIVATE_GROUP_BOT_API_ID المحدد."
                     )
         except ValueError:
             LOGS.error(
-                "PRIVATE_GROUP_BOT_API_ID cannot be found. Make sure it's correct."
+                "⌔︙ تـأكد من فـار المجـموعة  PRIVATE_GROUP_BOT_API_ID."
             )
         except TypeError:
             LOGS.error(
-                "PRIVATE_GROUP_BOT_API_ID is unsupported. Make sure it's correct."
+                "⌔︙ لا يمكـن العثور على فار المجموعه PRIVATE_GROUP_BOT_API_ID. تأكد من صحتها."
             )
         except Exception as e:
             LOGS.error(
-                "An Exception occured upon trying to verify the PRIVATE_GROUP_BOT_API_ID.\n"
+                "⌔︙ حدث استثناء عند محاولة التحقق من PRIVATE_GROUP_BOT_API_ID.\n"
                 + str(e)
             )
     else:
-        descript = "Don't delete this group or change to group(If you change group all your previous snips, welcome will be lost.)"
+        descript = "⌔︙ لا تحذف هذه المجموعة أو تغير إلى مجموعة (إذا قمت بتغيير المجموعة ، فسيتم فقد كل شيئ .)"
         _, groupid = await create_supergroup(
-            "CatUserbot BotLog Group", catub, Config.TG_BOT_USERNAME, descript
+            "مجموعه بوت ڤينوم الخاص بك", catub, Config.TG_BOT_USERNAME, descript
         )
         addgvar("PRIVATE_GROUP_BOT_API_ID", groupid)
         print(
-            "Private Group for PRIVATE_GROUP_BOT_API_ID is created successfully and added to vars."
+            "⌔︙ تم إنشاء مجموعة المسـاعدة بنجاح وإضافتها إلى المتغيرات."
         )
         flag = True
     if PM_LOGGER_GROUP_ID != -100:
@@ -221,21 +221,31 @@ async def verifyLoggerGroup():
             if not isinstance(entity, types.User) and not entity.creator:
                 if entity.default_banned_rights.send_messages:
                     LOGS.info(
-                        "Permissions missing to send messages for the specified PM_LOGGER_GROUP_ID."
+                        "⌔︙ الأذونات مفقودة لإرسال رسائل لـ PM_LOGGER_GROUP_ID المحدد."
                     )
                 if entity.default_banned_rights.invite_users:
                     LOGS.info(
-                        "Permissions missing to addusers for the specified PM_LOGGER_GROUP_ID."
+                        "⌔︙ الأذونات مفقودة للمستخدمين الإضافيين لـ PM_LOGGER_GROUP_ID المحدد."
                     )
         except ValueError:
-            LOGS.error("PM_LOGGER_GROUP_ID cannot be found. Make sure it's correct.")
+            LOGS.error("⌔︙ لا يمكن العثور على فار  PM_LOGGER_GROUP_ID. تأكد من صحتها.")
         except TypeError:
-            LOGS.error("PM_LOGGER_GROUP_ID is unsupported. Make sure it's correct.")
+            LOGS.error("⌔︙ PM_LOGGER_GROUP_ID غير مدعوم. تأكد من صحتها.")
         except Exception as e:
             LOGS.error(
-                "An Exception occured upon trying to verify the PM_LOGGER_GROUP_ID.\n"
+                "⌔︙ حدث استثناء عند محاولة التحقق من PM_LOGGER_GROUP_ID.\n"
                 + str(e)
             )
+    else:
+        descript = "⌔︙  وظيفه الكروب يحفظ رسائل الخاص اذا ما تريد الامر احذف الكروب نهائي \n  - @YS9II"
+        _, groupid = await create_supergroup(
+            "كـروب تخزين الخاص", catub, Config.TG_BOT_USERNAME, descript
+        )
+        addgvar("PM_LOGGER_GROUP_ID", groupid)
+        print(
+            "تـم عمـل الكروب التخزين بنـجاح واضافة الـفارات الـيه."
+        )
+        flag = True
     if flag:
         executable = sys.executable.replace(" ", "\\ ")
         args = [executable, "-m", "userbot"]

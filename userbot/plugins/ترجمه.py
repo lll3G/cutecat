@@ -33,8 +33,8 @@ async def getTranslate(text, **kwargs):
         "header": "لترجمة النص إلى اللغة المطلوبة.",
         "note": "لاكواد اللغه راجع [هذا اللينك](https://bit.ly/2SRQ6WU)",
         "usage": [
-            "{tr}ترجمه <كود اللغه> ; <النص>",
-            "{tr}ترجمه <كود اللغه>",
+            "{tr}<ترجمه <كود اللغه> ; <النص",
+            "{tr}<ترجمه <كود اللغه",
         ],
         "examples": "{tr}ترجمه  + ar ; venom is one of the popular bot",
     },

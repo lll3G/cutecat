@@ -1,14 +1,19 @@
+# Copyright (C) 2021 VENOM TEAM
+# FILES WRITTEN BY @YS9II
+
 import asyncio
+import glob
 import io
 import os
 import pathlib
 import re
-import time
 from datetime import datetime
+from time import time
 
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl import types
 from telethon.utils import get_attributes
+from wget import download
 from youtube_dl import YoutubeDL
 from youtube_dl.utils import (
     ContentTooShortError,
@@ -21,31 +26,20 @@ from youtube_dl.utils import (
     XAttrMetadataError,
 )
 
+from userbot import catub
 
+from ..core import pool
+from ..core.logger import logging
+from ..core.managers import edit_delete, edit_or_reply
+from ..helpers import progress, reply_id
+from ..helpers.functions.utube import _mp3Dl, get_yt_video_id, get_ytthumb, ytsearch
 from ..helpers.utils import _format
-from . import catub, edit_delete, edit_or_reply, hmention, progress, reply_id, ytsearch
+from . import hmention
 
+BASE_YT_URL = "https://www.youtube.com/watch?v="
+LOGS = logging.getLogger(__name__)
 plugin_category = "misc"
 
-audio_opts = {
-    "format": "bestaudio",
-    "addmetadata": True,
-    "key": "FFmpegMetadata",
-    "writethumbnail": True,
-    "prefer_ffmpeg": True,
-    "geo_bypass": True,
-    "nocheckcertificate": True,
-    "postprocessors": [
-        {
-            "key": "FFmpegExtractAudio",
-            "preferredcodec": "mp3",
-            "preferredquality": "320",
-        }
-    ],
-    "outtmpl": "%(title)s.mp3",
-    "quiet": True,
-    "logtostderr": False,
-}
 
 video_opts = {
     "format": "best",
@@ -55,7 +49,10 @@ video_opts = {
     "prefer_ffmpeg": True,
     "geo_bypass": True,
     "nocheckcertificate": True,
-    "postprocessors": [{"key": "FFmpegVideoConvertor", "preferedformat": "mp4"}],
+    "postprocessors": [
+        {"key": "FFmpegVideoConvertor", "preferedformat": "mp4"},
+        {"key": "FFmpegMetadata"},
+    ],
     "outtmpl": "%(title)s.mp4",
     "logtostderr": False,
     "quiet": True,
@@ -63,46 +60,38 @@ video_opts = {
 
 
 async def ytdl_down(event, opts, url):
+    ytdl_data = None
     try:
-        await event.edit("**⌔︙يتم جلب البيانات إنتظر قليلا ⏳**")
+        await event.edit("⌔︙يتم جلب البيانات إنتظر قليلا ⏳`")
         with YoutubeDL(opts) as ytdl:
             ytdl_data = ytdl.extract_info(url)
     except DownloadError as DE:
-        await event.edit(f"`{str(DE)}`")
-        return
+        await event.edit(f"`{DE}`")
     except ContentTooShortError:
-        await event.edit("**⌔︙عُذرا هذا المحتوى قصير جدًا لتنزيله ⚠️**")
-        return None
+        await event.edit("`⌔︙عُذرا هذا المحتوى قصير جدًا لتنزيله ⚠`")
     except GeoRestrictedError:
         await event.edit(
-            "**⌔︙الفيديو غير متاح من موقعك الجغرافي بسبب القيود الجغرافية التي يفرضها موقع الويب 🌍**"
+            "`⌔︙ هذا الفيديو غير متاح من موقعك الجغرافي بسبب القيود الجغرافية التي يفرضها موقع الويب 🌍`"
         )
-        return None
     except MaxDownloadsReached:
-        await event.edit("**⌔︙ تم الوصول إلى الحد الأقصى لعدد التنزيلات 🛑**")
-        return None
+        await event.edit("`⌔︙ تم الوصول إلى الحد الأقصى لعدد التنزيلات 🛑`")
     except PostProcessingError:
-        await event.edit("**⌔︙ كان هناك خطأ أثناء المعالجة ⚠️**")
-        return None
+        await event.edit("`⌔︙ كان هناك خطأ أثناء المعالجة ⚠️`")
     except UnavailableVideoError:
-        await event.edit("**⌔︙ الوسائط غير متوفرة بالتنسيق المطلوب ⚠️**")
-        return None
+        await event.edit("`⌔︙ الوسائط غير متوفرة بالتنسيق المطلوب ⚠️`")
     except XAttrMetadataError as XAME:
-        await event.edit(f"⌔︙ `{XAME.code}: {XAME.msg}\n{XAME.reason}`")
-        return None
+        await event.edit(f"`{XAME.code}: {XAME.msg}\n{XAME.reason}`")
     except ExtractorError:
-        await event.edit("**⌔︙ حدث خطأ أثناء استخراج المعلومات يرجى وضعها بشكل صحيح ❗️**")
-        return None
+        await event.edit("`⌔︙ حدث خطأ أثناء استخراج المعلومات يرجى وضعها بشكل صحيح ❗️`")
     except Exception as e:
-        await event.edit(f"**⌔︙حـدث خطأ  ⚠️ : **\n__{str(e)}__")
-        return None
+        await event.edit(f"**خطأ ⚠️ : **\n__{e}__")
     return ytdl_data
 
 
 async def fix_attributes(
     path, info_dict: dict, supports_streaming: bool = False, round_message: bool = False
 ) -> list:
-    """⌔︙تجنب الحالات المتعددة للميزة ✳️"""
+    """⌔︙ تجنب الحالات المتعددة للميزة ✳️"""
     new_attributes = []
     video = False
     audio = False
@@ -111,12 +100,14 @@ async def fix_attributes(
     duration = int(info_dict.get("duration", 0))
     suffix = path.suffix[1:]
     if supports_streaming and suffix != "mp4":
-        supports_streaming = False
+        supports_streaming = True
 
     attributes, mime_type = get_attributes(path)
     if suffix == "mp3":
         title = str(info_dict.get("title", info_dict.get("id", "Unknown title")))
-        audio = types.DocumentAttributeAudio(duration, None, title, uploader)
+        audio = types.DocumentAttributeAudio(
+            duration=duration, voice=None, title=title, performer=uploader
+        )
     elif suffix == "mp4":
         width = int(info_dict.get("width", 0))
         height = int(info_dict.get("height", 0))
@@ -127,7 +118,11 @@ async def fix_attributes(
                 height = height or attr.h
                 break
         video = types.DocumentAttributeVideo(
-            duration, width, height, round_message, supports_streaming
+            duration=duration,
+            w=width,
+            h=height,
+            round_message=round_message,
+            supports_streaming=supports_streaming,
         )
 
     if audio and isinstance(audio, types.DocumentAttributeAudio):
@@ -148,20 +143,13 @@ async def fix_attributes(
     return new_attributes, mime_type
 
 
-async def _get_file_name(path: pathlib.Path, full: bool = True) -> str:
-    return str(path.absolute()) if full else path.stem + path.suffix
-
-
 @catub.cat_cmd(
-    pattern="تحميل ص(?: |$)(.*)",
-    command=("تحميل ص", plugin_category),
+    pattern="تحميل صوت(?:\s|$)([\s\S]*)",
+    command=("تحميل صوت", plugin_category),
     info={
-        "header": "⌔︙ لتنزيل الصوت من العديد من المواقع مثل Youtube",
-        "description": "⌔︙ تحميل المقطع الصوتي من الرابط المعطى ( يدعم جميع المواقع التي تدعم yt-dl)  📮",
-        "examples": [
-            "{tr}<تحميل ص <الرد على رابط",
-            "{tr}<تحميل ص <الرابط",
-        ],
+        "header": "⌔︙لتحميل مقطع صوتي من اليوتيوب ومواقع أخرى 🎙",
+        "description": "تحميل المقطع الصوتي من الرابط المعطى (يدعم جميع المواقع التي تدعم youtube-dl) 📮",
+        "examples": ["{tr}تحميل صوت <بالرد علي الرابط>", "{tr}تحميل صوت <الرابط>"],
     },
 )
 async def download_audio(event):
@@ -172,63 +160,79 @@ async def download_audio(event):
         myString = rmsg.text
         url = re.search("(?P<url>https?://[^\s]+)", myString).group("url")
     if not url:
-        return await edit_or_reply(event, "**⌔︙ يجب وضع رابط لتحميله  ❗️**")
-    catevent = await edit_or_reply(event, "**⌔︙ يتم الإعداد إنتظر قليلا  ⏱**")
+        return await edit_or_reply(event, "`⌔︙ يجب وضع رابط لتحميله  ❗`")
+    catevent = await edit_or_reply(event, "`⌔︙ يتم الإعداد إنتظر قليلا  ⏱`")
     reply_to_id = await reply_id(event)
-    ytdl_data = await ytdl_down(catevent, audio_opts, url)
-    if ytdl_data is None:
-
-        return
+    try:
+        vid_data = YoutubeDL({"no-playlist": True}).extract_info(url, download=False)
+    except ExtractorError:
+        vid_data = {"title": url, "uploader": "Catuserbot", "formats": []}
+    startTime = time()
+    retcode = await _mp3Dl(url=url, starttime=startTime, uid="320")
+    if retcode != 0:
+        return await event.edit(str(retcode))
+    _fpath = ""
+    thumb_pic = None
+    for _path in glob.glob(os.path.join(Config.TEMP_DIR, str(startTime), "*")):
+        if _path.lower().endswith((".jpg", ".png", ".webp")):
+            thumb_pic = _path
+        else:
+            _fpath = _path
+    if not _fpath:
+        return await edit_delete(catevent, "غير قادر علي تحميل الاغنية 🚫")
     await catevent.edit(
-        f"**⌔︙ يتم لتحميل الأغنية 🎙 :**\
-        \n**{ytdl_data['title']}**\
-        \n⌔︙بواسطة 📝 : **{ytdl_data['uploader']}**"
+        f"`⌔︙ يتم لتحميل الأغنية 🎙 :`\
+        \n**{vid_data['title']}**\
+        \n⌔︙بواسطة 📝 : *{vid_data['uploader']}*"
     )
-    f = pathlib.Path(f"{ytdl_data['title']}.mp3".replace("|", "_"))
-    catthumb = pathlib.Path(f"{ytdl_data['title']}.mp3.jpg".replace("|", "_"))
-    if not os.path.exists(catthumb):
-        catthumb = pathlib.Path(f"{ytdl_data['title']}.mp3.webp".replace("|", "_"))
-    if not os.path.exists(catthumb):
-        catthumb = None
-    c_time = time.time()
-    ul = io.open(f, "rb")
+    attributes, mime_type = get_attributes(str(_fpath))
+    ul = io.open(pathlib.Path(_fpath), "rb")
+    if thumb_pic is None:
+        thumb_pic = str(
+            await pool.run_in_thread(download)(await get_ytthumb(get_yt_video_id(url)))
+        )
     uploaded = await event.client.fast_upload_file(
         file=ul,
         progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-            progress(d, t, catevent, c_time, "upload", file_name=f)
+            progress(
+                d,
+                t,
+                catevent,
+                startTime,
+                "trying to upload",
+                file_name=os.path.basename(pathlib.Path(_fpath)),
+            )
         ),
     )
     ul.close()
-    attributes, mime_type = await fix_attributes(f, ytdl_data, supports_streaming=True)
     media = types.InputMediaUploadedDocument(
         file=uploaded,
         mime_type=mime_type,
         attributes=attributes,
-        thumb=await event.client.upload_file(catthumb) if catthumb else None,
+        force_file=False,
+        thumb=await event.client.upload_file(thumb_pic) if thumb_pic else None,
     )
     await event.client.send_file(
         event.chat_id,
         file=media,
+        caption=f"<b>اسم الملف 🧪: </b><code>{vid_data.get('title', os.path.basename(pathlib.Path(_fpath)))}</code>",
         reply_to=reply_to_id,
-        caption=ytdl_data["title"],
-        supports_streaming=True,
-        force_document=False,
+        parse_mode="html",
     )
-    os.remove(f)
-    if catthumb:
-        os.remove(catthumb)
+    for _path in [_fpath, thumb_pic]:
+        os.remove(_path)
     await catevent.delete()
 
 
 @catub.cat_cmd(
-    pattern="تحميل ف(?: |$)(.*)",
-    command=("تحميل ف", plugin_category),
+    pattern="تحميل فيديو(?:\s|$)([\s\S]*)",
+    command=("تحميل فيديو", plugin_category),
     info={
         "header": "⌔︙ لتحميل فيديو من مواقع عديدة مثل يوتيوب  📮",
-        "description": "⌔︙ تحميل الفيديو من الرابط المعطى ( يدعم جميع المواقع التي تدعم yt-dl)  📮",
+        "description": "⌔︙ تحميل الفيديو من الرابط المعطى(يدعم جميع المواقع التي تدعم youtube-dl) 📮",
         "examples": [
-            "{tr}<تحميل ف <الرد بالرابط",
-            "{tr}<تحميل ف <الرابط",
+            "{tr}تحميل فيديو <بالرد علي الرابط>",
+            "{tr}تحميل فيديو <الرابط>",
         ],
     },
 )
@@ -240,8 +244,8 @@ async def download_video(event):
         myString = rmsg.text
         url = re.search("(?P<url>https?://[^\s]+)", myString).group("url")
     if not url:
-        return await edit_or_reply(event, "**⌔︙ عليك وضع رابـط اولا ليتم تنـزيله ❗️**")
-    catevent = await edit_or_reply(event, "**⌔︙ يتم التحميل إنتظر قليلا  ⏱**")
+        return await edit_or_reply(event, "⌔︙ عليك وضع رابـط اولا ليتم تنـزيله ❗")
+    catevent = await edit_or_reply(event, "`⌔︙ يتم التحميل إنتظر قليلا  ⏱`")
     reply_to_id = await reply_id(event)
     ytdl_data = await ytdl_down(catevent, video_opts, url)
     if ytdl_down is None:
@@ -253,12 +257,12 @@ async def download_video(event):
     if not os.path.exists(catthumb):
         catthumb = None
     await catevent.edit(
-        f"**⌔︙ التحضيـر للـرفع إنتظر ♻️ **:\
+        f"`⌔︙ التحضيـر للـرفع إنتظر ♻`\
         \n**{ytdl_data['title']}**\
         \n⌔︙بواسطة 📝 : *{ytdl_data['uploader']}*"
     )
     ul = io.open(f, "rb")
-    c_time = time.time()
+    c_time = time()
     attributes, mime_type = await fix_attributes(f, ytdl_data, supports_streaming=True)
     uploaded = await event.client.fast_upload_file(
         file=ul,

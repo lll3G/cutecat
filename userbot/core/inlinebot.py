@@ -30,7 +30,7 @@ from .logger import logging
 LOGS = logging.getLogger(__name__)
 
 BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>)")
-CATLOGO = "https://telegra.ph/file/83e8cdb38df27dea3cab6.jpg"
+CATLOGO = "https://telegra.ph/file/493268c1f5ebedc967eba.jpg"
 tr = Config.COMMAND_HAND_LER
 
 
@@ -53,15 +53,13 @@ def ibuild_keyboard(buttons):
 
 
 def main_menu():
-    text = f"تعريب ڤينوم\
-        \n مساعده\
-        \n\
-        \n 𝗣𝗿𝗼𝘃𝗶𝗱𝗲𝗱 𝗯𝘆 {mention}"
+    text = f"𝗖𝗮𝘁𝗨𝘀𝗲𝗿𝗯𝗼𝘁\
+        \n𝗣𝗿𝗼𝘃𝗶𝗱𝗲𝗱 𝗯𝘆 {mention}"
     buttons = [
-        (Button.inline("ℹ️ معلومات", data="check"),),
+        (Button.inline("ℹ️ Info", data="check"),),
         (
             Button.inline(f"👮‍♂️ Admin ({len(GRP_INFO['admin'])})", data="admin_menu"),
-            Button.inline(f"🤖 Fun ({len(GRP_INFO['bot'])})", data="bot_menu"),
+            Button.inline(f"🤖 Bot ({len(GRP_INFO['bot'])})", data="bot_menu"),
         ),
         (
             Button.inline(f"🎨 Fun ({len(GRP_INFO['fun'])})", data="fun_menu"),
@@ -74,7 +72,7 @@ def main_menu():
         (
             Button.inline(f"➕ Extra ({len(GRP_INFO['extra'])})", data="extra_menu"),
             Button.inline(
-                f"⚰️ Useless({len(GRP_INFO['useless'])})", data="useless_menu"
+                f"⚰️ Useless ({len(GRP_INFO['useless'])})", data="useless_menu"
             ),
         ),
         (Button.inline("🔒 اغلاق الاعدادات", data="close"),),
@@ -169,12 +167,12 @@ def paginate_help(
             ] + [
                 (
                     Button.inline("⌫", data=f"{prefix}_prev({modulo_page})_plugin"),
-                    Button.inline("⚙️ القائمة الرئيسية", data="mainmenu"),
+                    Button.inline("⚙️ Main Menu", data="mainmenu"),
                     Button.inline("⌦", data=f"{prefix}_next({modulo_page})_plugin"),
                 )
             ]
         else:
-            pairs = pairs + [(Button.inline("⚙️ القائمة الرئيسية", data="mainmenu"),)]
+            pairs = pairs + [(Button.inline("⚙️ Main Menu", data="mainmenu"),)]
     elif len(pairs) > number_of_rows:
         if category_pgno < 0:
             category_pgno = len(pairs) + category_pgno
@@ -227,7 +225,7 @@ async def inline_handler(event):  # sourcery no-metrics
         match2 = re.findall(inf, query)
         hid = re.compile("hide (.*)")
         match3 = re.findall(hid, query)
-        if query.startswith("**catubuserbot"):
+        if query.startswith("**Catuserbot"):
             buttons = [
                 (
                     Button.inline("Stats", data="stats"),
@@ -539,7 +537,7 @@ async def inline_handler(event):  # sourcery no-metrics
                 Button.url("سورس كود", "https://github.com/abasheyari595/cutecat"),
                 Button.url(
                     "التنصيب",
-                    "https://dashboard.heroku.com/new?template=https://github.com/venom-ar/catpack",
+                    "https://dashboard.heroku.com/new?template=https://github.com/catub-ar/catpack",
                 ),
             )
         ]
@@ -576,11 +574,11 @@ async def on_plug_in_callback_query_handler(event):
 
 @catub.tgbot.on(CallbackQuery(data=re.compile(b"check")))
 async def on_plugin_callback_query_handler(event):
-    text = f"الاضافات: {len(PLG_INFO)}\
-        \nالاوامر: {len(CMD_INFO)}\
-        \n\n{tr}help <اسم الاضافه> : للحصول علي معلومات حول الاضافه.\
-        \n{tr}help الامر <اسم الامر> : لمعلومات عن اي امر.\
-        \n{tr}بحث عن امر <القيمه> : للبحث عن اي امر.\
+    text = f"𝙿𝚕𝚞𝚐𝚒𝚗𝚜: {len(PLG_INFO)}\
+        \n𝙲𝚘𝚖𝚖𝚊𝚗𝚍𝚜: {len(CMD_INFO)}\
+        \n\n{tr}𝚑𝚎𝚕𝚙 <𝚙𝚕𝚞𝚐𝚒𝚗> : 𝙵𝚘𝚛 𝚜𝚙𝚎𝚌𝚒𝚏𝚒𝚌 𝚙𝚕𝚞𝚐𝚒𝚗 𝚒𝚗𝚏𝚘.\
+        \n{tr}𝚑𝚎𝚕𝚙 𝚌 <𝚌𝚘𝚖𝚖𝚊𝚗𝚍> : 𝙵𝚘𝚛 𝚊𝚗𝚢 𝚌𝚘𝚖𝚖𝚊𝚗𝚍 𝚒𝚗𝚏𝚘.\
+        \n{tr}𝚜 <𝚚𝚞𝚎𝚛𝚢> : 𝚃𝚘 𝚜𝚎𝚊𝚛𝚌𝚑 𝚊𝚗𝚢 𝚌𝚘𝚖𝚖𝚊𝚗𝚍𝚜.\
         "
     await event.answer(text, cache_time=0, alert=True)
 
@@ -590,9 +588,9 @@ async def on_plugin_callback_query_handler(event):
 async def on_plug_in_callback_query_handler(event):
     category = str(event.pattern_match.group(1).decode("UTF-8"))
     buttons = paginate_help(0, GRP_INFO[category], category)
-    text = f"**الفئه: **{category}\
-        \n**إجمالي الأوامر :** {len(GRP_INFO[category])}\
-        \n**إجمالي الأوامر:** {command_in_category(category)}"
+    text = f"**Category: **{category}\
+        \n**Total plugins :** {len(GRP_INFO[category])}\
+        \n**Total Commands:** {command_in_category(category)}"
     await event.edit(text, buttons=buttons)
 
 
@@ -608,9 +606,9 @@ async def on_plug_in_callback_query_handler(event):
     pgno = int(event.pattern_match.group(3).decode("UTF-8"))
     if mtype == "plugin":
         buttons = paginate_help(pgno, GRP_INFO[category], category)
-        text = f"**الفئه: **`{category}`\
-            \n**إجمالي الأوامر :** __{len(GRP_INFO[category])}__\
-            \n**إجمالي الأوامر:** __{command_in_category(category)}__"
+        text = f"**Category: **`{category}`\
+            \n**Total plugins :** __{len(GRP_INFO[category])}__\
+            \n**Total Commands:** __{command_in_category(category)}__"
     else:
         category_plugins = str(event.pattern_match.group(4).decode("UTF-8"))
         category_pgno = int(event.pattern_match.group(5).decode("UTF-8"))
@@ -622,9 +620,9 @@ async def on_plug_in_callback_query_handler(event):
             category_plugins=category_plugins,
             category_pgno=category_pgno,
         )
-        text = f"**الاضافه: **`{category}`\
-                \n**الفئه: **__{getkey(category)}__\
-                \n**إجمالي الأوامر:** __{len(PLG_INFO[category])}__"
+        text = f"**Plugin: **`{category}`\
+                \n**Category: **__{getkey(category)}__\
+                \n**Total Commands:** __{len(PLG_INFO[category])}__"
     await event.edit(text, buttons=buttons)
 
 
@@ -656,9 +654,9 @@ async def on_plug_in_callback_query_handler(event):
             category_plugins=category_plugins,
             category_pgno=category_pgno,
         )
-        text = f"**الاضافه: **`{category}`\
-                \n**الفئه: **__{getkey(category)}__\
-                \n**إجمالي الأوامر:** __{len(PLG_INFO[category])}__"
+        text = f"**Plugin: **`{category}`\
+                \n**Category: **__{getkey(category)}__\
+                \n**Total Commands:** __{len(PLG_INFO[category])}__"
         try:
             return await event.edit(text, buttons=buttons)
         except Exception as e:
@@ -709,14 +707,14 @@ async def on_plug_in_callback_query_handler(event):
     buttons = [
         (
             Button.inline(
-                "⬅️ للخلف ",
+                "⬅️ Back ",
                 data=f"back_command_{category}_{pgno}_{category_plugins}_{category_pgno}",
             ),
-            Button.inline("⚙️ القائمة الرئيسية", data="mainmenu"),
+            Button.inline("⚙️ Main Menu", data="mainmenu"),
         )
     ]
-    text = f"**الامر :** `{tr}{cmd}`\
-        \n**الاضافه :** `{category}`\
-        \n**الفئه :** `{category_plugins}`\
-        \n\n**✘ المقدمه :**\n{CMD_INFO[cmd][0]}"
+    text = f"**Command :** `{tr}{cmd}`\
+        \n**Plugin :** `{category}`\
+        \n**Category :** `{category_plugins}`\
+        \n\n**✘ Intro :**\n{CMD_INFO[cmd][0]}"
     await event.edit(text, buttons=buttons)

@@ -190,15 +190,13 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
     command=("تحديث", plugin_category),
     info={
         "header": "لتحديث التيلثون.",
-        "description": "تحديث التيلثون يفضل استخدام امر تحديث التيلثون كل لتحديث المتطلبات ايضاً.",
+        "description": "تحديث التيلثون.",
         "options": {
             "الان": "سيتم تحديث بوت ولكن المتطلبات لا يتم التحديث.",
-            "التيلثون": "سوف يتم تحديث البوت تماما مع المتطلبات أيضا.",
         },
         "usage": [
             "{tr}تحديث",
             "{tr}تحديث الان",
-            "{tr}تحديث التيلثون",
         ],
     },
 )
@@ -276,37 +274,3 @@ async def upstream(event):
         await event.edit("** ⌔︙ جار تحـديـث تيلثون كات بالعربي انـتـظـر قـليـلا 🔨**")
         await update(event, repo, ups_rem, ac_br)
     return
-
-@catub.cat_cmd(
-    pattern="تحديث التيلثون$",
-)
-async def upstream(event):
-    event = await edit_or_reply(event, "`Pulling the catpack repo wait a sec ....`")
-    off_repo = "https://github.com/Mr-confused/nekopack"
-    os.chdir("/app")
-    try:
-        txt = "`عفوا .. لا يمكن أن يستمر التحديث بسبب "
-        txt += "حدثت بعض المشاكل`\n\n**LOGTRACE:**\n"
-        repo = Repo()
-    except NoSuchPathError as error:
-        await event.edit(f"{txt}\n`directory {error} is not found`")
-        return repo.__del__()
-    except GitCommandError as error:
-        await event.edit(f"{txt}\n`Early failure! {error}`")
-        return repo.__del__()
-    except InvalidGitRepositoryError:
-        repo = Repo.init()
-        origin = repo.create_remote("upstream", off_repo)
-        origin.fetch()
-        repo.create_head("master", origin.refs.master)
-        repo.heads.master.set_tracking_branch(origin.refs.master)
-        repo.heads.master.checkout(True)
-    try:
-        repo.create_remote("upstream", off_repo)
-    except BaseException:
-        pass
-    ac_br = repo.active_branch.name
-    ups_rem = repo.remote("upstream")
-    ups_rem.fetch(ac_br)
-    await event.edit("`جاري تحديث التيلثون الرجاء الانتظار 🔨⏳....`")
-    await deploy(event, repo, ups_rem, ac_br, txt)

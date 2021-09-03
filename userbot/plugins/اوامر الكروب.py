@@ -67,7 +67,7 @@ async def ban_user(chat_id, i, rights):
 )
 async def kickme(leave):
     "للمغادره من المجموعه."
-    await leave.edit("**⌔︙ جـاري مـغادرة المجـموعة مـع السـلامة  🚶‍♂️  ..**")
+    await leave.edit("**⌔︙ جـاري مـغادرة المجـموعة مـع السـلامة  🚶‍♂️**")
     await leave.client.kick_participant(leave.chat_id, "me")
 
 @catub.cat_cmd(

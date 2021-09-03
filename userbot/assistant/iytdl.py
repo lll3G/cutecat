@@ -63,7 +63,7 @@ async def iytdl_inline(event):
         input_url = (reply.text).strip()
     if not input_url:
         return await edit_delete(event, " ⌔︙ يجـب وضـع اسـم المـوضوع او بالـرد عـلـى الـرابـط")
-    catevent = await edit_or_reply(event, f"🔎 يتـم البـحث في اليـوتيـوب عـن : `'{input_url}'`")
+    catevent = await edit_or_reply(event, f"🔎 يتـم البـحث في اليـوتيـوب عـن : `{input_url}`")
     flag = True
     cout = 0
     results = None
@@ -115,11 +115,11 @@ async def ytdl_download_callback(c_q: CallbackQuery):  # sourcery no-metrics
             return
     startTime = time()
     choice_str, disp_str = get_choice_by_id(choice_id, downtype)
-    media_type = "الفيديـو" if downtype == "v" else "المقـطع صـوتـي"
+    media_type = "Video" if downtype == "v" else "Audio"
     callback_continue = f" ⌔︙ يتـم تـحـميـل  {media_type} الــرجاء الانتـظار"
     callback_continue += f"\n\nFormat Code : {disp_str}"
     await c_q.answer(callback_continue, alert=True)
-    upload_msg = await c_q.client.send_message(BOTLOG_CHATID, "Uploading...")
+    upload_msg = await c_q.client.send_message(BOTLOG_CHATID, "جار التحميل ⏳...")
     yt_url = BASE_YT_URL + yt_code
     await c_q.edit(
         f"<b>⬇️ يتـم تـحـميـل {media_type} ....</b>\n\n🔗  <a href={yt_url}> <b>الـرابـط</b></a>\n🆔  <b>صـيغة الـتنـزيل</b> : {disp_str}",
@@ -169,7 +169,7 @@ async def ytdl_download_callback(c_q: CallbackQuery):  # sourcery no-metrics
     uploaded_media = await c_q.client.send_file(
         BOTLOG_CHATID,
         file=media,
-        caption=f"<b>اسم الملف 📮: </b><code>{os.path.basename(Path(_fpath))}</code>",
+        caption=f"<b>اسم الملف 📮 : </b><code>{os.path.basename(Path(_fpath))}</code>",
         parse_mode="html",
     )
     await upload_msg.delete()
@@ -202,7 +202,7 @@ async def ytdl_callback(c_q: CallbackQuery):
     )
     if not os.path.exists(PATH):
         return await c_q.answer(
-            "بيانات البحث لا توجد بعد الآن، يرجى إجراء البحث مرة أخرى ...",
+            "بيانات البحث لا توجد بعد الآن، يرجى إجراء البحث مرة أخرى 🚨...",
             alert=True,
         )
     with open(PATH) as f:

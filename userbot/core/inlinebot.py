@@ -30,7 +30,7 @@ from .logger import logging
 LOGS = logging.getLogger(__name__)
 
 BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>)")
-CATLOGO = "https://telegra.ph/file/493268c1f5ebedc967eba.jpg"
+CATLOGO = "https://telegra.ph/file/59cc199afc4ef16bad437.jpg"
 tr = Config.COMMAND_HAND_LER
 
 
@@ -537,7 +537,7 @@ async def inline_handler(event):  # sourcery no-metrics
                 Button.url("سورس كود", "https://github.com/abasheyari595/cutecat"),
                 Button.url(
                     "التنصيب",
-                    "https://dashboard.heroku.com/new?template=https://github.com/catub-ar/catpack",
+                    "https://dashboard.heroku.com/new?template=https://github.com/venom-ar/catpack",
                 ),
             )
         ]
@@ -707,7 +707,7 @@ async def on_plug_in_callback_query_handler(event):
     buttons = [
         (
             Button.inline(
-                "⬅️ Back ",
+                "⬅️ للخلف ",
                 data=f"back_command_{category}_{pgno}_{category_plugins}_{category_pgno}",
             ),
             Button.inline("⚙️ Main Menu", data="mainmenu"),

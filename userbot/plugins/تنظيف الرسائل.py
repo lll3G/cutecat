@@ -98,7 +98,7 @@ async def delete_it(event):
         "header": "لمسح أحدث رسائلك.",
         "description": "حذف x (عدد) كمية الرسائل الأخيرة.",
         "usage": "{tr}ازالة العدد",
-        "examples": "{tr}ازالة العدد",
+        "examples": "{tr}ازالة 50",
     },
 )
 async def purgeme(event):

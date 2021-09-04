@@ -81,7 +81,7 @@ async def startupmessage():
         if msg_details:
             await catub.check_testcases()
             message = await catub.get_messages(msg_details[0], ids=msg_details[1])
-            text = message.text + "\n\n**⌔︙ اهلا وسهلا لقد قمت باعاده التشغيل بـوت كات يعمل بنجاح ✅**"
+            text = message.text + "\n\n**⌔︙ اهلا وسهلا لقد قمت باعاده التشغيل بـوت كات بالعربي يعمل بنجاح ✅**"
             await catub.edit_message(msg_details[0], msg_details[1], text)
             if gvarstatus("restartupdate") is not None:
                 await catub.send_message(
@@ -208,7 +208,7 @@ async def verifyLoggerGroup():
     else:
         descript = "⌔︙ لا تحذف هذه المجموعة أو تغير إلى مجموعة (إذا قمت بتغيير المجموعة ، فسيتم فقد كل شيئ .)"
         _, groupid = await create_supergroup(
-            "مجموعه بوت ڤينوم الخاص بك", catub, Config.TG_BOT_USERNAME, descript
+            "مجموعة كات بالعربي الخاص بك", catub, Config.TG_BOT_USERNAME, descript
         )
         addgvar("PRIVATE_GROUP_BOT_API_ID", groupid)
         print(

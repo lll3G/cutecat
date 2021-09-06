@@ -1018,7 +1018,7 @@ async def _(event):
             uadduser = "❌" if chat_per.invite_users else "✅"
             ucpin = "❌" if chat_per.pin_messages else "✅"
             uchangeinfo = "❌" if chat_per.change_info else "✅"
-        output += f"{_format.mentionuser(user.first_name ,user.id)} **صلاحياته في مجموعة{event.chat.title} هيا 🧪**\n"
+        output += f"{_format.mentionuser(user.first_name ,user.id)} **صلاحياته في مجموعة {event.chat.title} هيا 🧪**\n"
         output += f"⌔︙ ارسال الرسائل : {umsg}\n"
         output += f"⌔︙ ارسال الوسائط : {umedia}\n"
         output += f"⌔︙ ارسال الملصقات : {usticker}\n"
